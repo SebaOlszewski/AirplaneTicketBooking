@@ -7,18 +7,18 @@
 <h1>ListFlights</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreateFlight">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th hidden = true>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
+            <th hidden=true>
                 @Html.DisplayNameFor(model => model.Rows)
             </th>
-            <th>
+            <th hidden=true>
                 @Html.DisplayNameFor(model => model.Columns)
             </th>
             <th>
@@ -39,13 +39,11 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
+             
+            <td hidden>
                 @Html.DisplayFor(modelItem => item.Rows)
             </td>
-            <td>
+                <td hidden>
                 @Html.DisplayFor(modelItem => item.Columns)
             </td>
             <td>

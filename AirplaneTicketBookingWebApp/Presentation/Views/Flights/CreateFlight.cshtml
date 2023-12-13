@@ -1,0 +1,58 @@
+﻿@model Presentation.Models.ViewModels.CreateFlightViewModel
+
+@{
+    ViewData["Title"] = "CreateFlight";
+}
+
+<h1>CreateFlight</h1>
+
+<h4>CreateFlightViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateFlight">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Rows" class="control-label"></label>
+                <input asp-for="Rows" class="form-control" />
+                <span asp-validation-for="Rows" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Columns" class="control-label"></label>
+                <input asp-for="Columns" class="form-control" />
+                <span asp-validation-for="Columns" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartureDate" class="control-label"></label>
+                <input asp-for="DepartureDate" class="form-control" />
+                <span asp-validation-for="DepartureDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArrivalDate" class="control-label"></label>
+                <input asp-for="ArrivalDate" class="form-control" />
+                <span asp-validation-for="ArrivalDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryFrom" class="control-label"></label>
+                <input asp-for="CountryFrom" class="form-control" />
+                <span asp-validation-for="CountryFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryTo" class="control-label"></label>
+                <input asp-for="CountryTo" class="form-control" />
+                <span asp-validation-for="CountryTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

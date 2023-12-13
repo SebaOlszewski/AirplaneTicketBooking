@@ -9,16 +9,16 @@ namespace Presentation.Controllers
 {
     public class FlightsController : Controller
     {
-        private FlightDbRepository _airlineRepository;
+        private FlightDbRepository _flightRepository;
         public FlightsController(FlightDbRepository flightRepository)
         {
-            _airlineRepository = flightRepository;
+            _flightRepository = flightRepository;
         }
 
         //show flights
         public IActionResult ListFlights()
         {
-            IQueryable<Flight> list = _airlineRepository.GetFlights().OrderBy(x => x.CountryFrom);
+            IQueryable<Flight> list = _flightRepository.GetFlights().OrderBy(x => x.CountryFrom);
 
             var output = from p in list select new ListFlightsViewModel()
                             {
@@ -39,14 +39,27 @@ namespace Presentation.Controllers
         [HttpGet]
         public IActionResult CreateFlight()
         {
-            return RedirectToAction("Index", "Home");
+            CreateFlightViewModel myModel = new CreateFlightViewModel();
+            return View(myModel);
         }
 
         [HttpPost]
-        public IActionResult CreateFlights()
+        public IActionResult CreateFlight(CreateFlightViewModel myModel)
         {
+           
+                _flightRepository.AddFlight(new Flight()
+                {
+                    Rows = myModel.Rows,
+                    Columns = myModel.Columns,
+                    DepartureDate = myModel.DepartureDate,
+                    ArrivalDate = myModel.ArrivalDate,
+                    CountryFrom = myModel.CountryFrom,
+                    CountryTo = myModel.CountryTo,
 
-            return RedirectToAction("Index", "Home");        
+                });
+                //TempData["message"] = "Product saved successfully!";
+                return RedirectToAction("ListFlights", "Flights");
+           
         }
     }
 }

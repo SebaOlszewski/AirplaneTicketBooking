@@ -20,6 +20,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Flights/CreateFlight.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xDcmVhdGVGbGlnaHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Flights/ListFlights.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xMaXN0RmxpZ2h0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
