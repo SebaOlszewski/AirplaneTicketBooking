@@ -24,7 +24,7 @@ namespace Data.Repositories
         }
 
 
-        public Flight? GetFlight(Guid FlightId)
+        public Flight? GetFlights(Guid FlightId)
         {
             return GetFlights().SingleOrDefault(x => x.Id == FlightId);
         }
@@ -34,6 +34,40 @@ namespace Data.Repositories
             return _AirlineDbContext.Flights;
         }
 
+        public void DeleteFlight(Guid FlightId)
+        {
+            var flightToDelete = GetFlights(FlightId);
+            if (flightToDelete != null)
+            {
+                _AirlineDbContext.Remove(flightToDelete);
+                _AirlineDbContext.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("No product to delete");
+            }
+        }
+
+        public void UpdateFlight(Flight chosenFlight)
+        {
+            var flightToUpdate = GetFlights(chosenFlight.Id);
+            if (flightToUpdate != null)
+            {
+                flightToUpdate.Rows = chosenFlight.Rows;
+                flightToUpdate.Columns = chosenFlight.Columns;
+                flightToUpdate.DepartureDate = chosenFlight.DepartureDate;
+                flightToUpdate.ArrivalDate = chosenFlight.ArrivalDate;
+                flightToUpdate.CountryFrom = chosenFlight.CountryFrom;
+                flightToUpdate.CountryTo = chosenFlight.CountryTo;
+                flightToUpdate.WholesalePrice = chosenFlight.WholesalePrice;
+                flightToUpdate.CommissionRate = chosenFlight.CommissionRate;
+                _AirlineDbContext.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("No product to update");
+            }
+        }
 
     }
 }

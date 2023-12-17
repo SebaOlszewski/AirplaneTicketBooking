@@ -15,6 +15,7 @@ namespace Presentation.Controllers
             _flightRepository = flightRepository;
         }
 
+
         //show flights
         public IActionResult ListFlights()
         {
@@ -61,5 +62,95 @@ namespace Presentation.Controllers
                 return RedirectToAction("ListFlights", "Flights");
            
         }
+
+        public IActionResult FlightDetails(Guid Id)
+        {
+            var chosenFlight = _flightRepository.GetFlights(Id);
+            if(chosenFlight == null)
+            {
+                //add information that flight was not found
+                return RedirectToAction("ListFlights", "Flights");
+            }
+            else
+            {
+
+                ListFlightsViewModel flightModel = new ListFlightsViewModel()
+                {
+                    Id = chosenFlight.Id,
+                    Rows = chosenFlight.Rows,
+                    Columns = chosenFlight.Columns,
+                    DepartureDate = chosenFlight.DepartureDate,
+                    ArrivalDate = chosenFlight.ArrivalDate,
+                    CountryFrom = chosenFlight.CountryFrom,
+                    CountryTo = chosenFlight.CountryTo,
+
+
+                };
+                return View(flightModel);
+            }
+        }
+
+        public IActionResult DeleteFlight(Guid Id)
+        {
+            try
+            {
+                TempData["message"] = "Product deleted successfully";
+                _flightRepository.DeleteFlight(Id);
+            }catch (Exception ex)
+            {
+                TempData["error"] = "Product was not deleted";
+            }
+
+            return RedirectToAction("ListFlights", "Flights");
+
+        }
+
+
+        [HttpGet]
+        public IActionResult EditFlight(Guid Id)
+        {
+            EditFlightViewModel flightModel = new EditFlightViewModel();
+
+
+            //this is just to show current details of the flight to the user
+            var originalFlight = _flightRepository.GetFlights(Id);
+            flightModel.Rows = originalFlight.Rows;
+            flightModel.Columns = originalFlight.Columns;
+            flightModel.DepartureDate = originalFlight.DepartureDate;
+            flightModel.ArrivalDate = originalFlight.ArrivalDate;
+            flightModel.CountryFrom = originalFlight.CountryFrom;
+            flightModel.CountryTo = originalFlight.CountryTo;
+            flightModel.WholesalePrice = originalFlight.WholesalePrice;
+            flightModel.CommissionRate = originalFlight.CommissionRate;
+
+            return View(flightModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditFlight(EditFlightViewModel myModel)
+        {
+           if(_flightRepository.GetFlights(myModel.Id) == null)
+            {
+                TempData["error"] = "Product does not exist";
+                return RedirectToAction("ListFlights", "Flights");
+            }else
+            _flightRepository.UpdateFlight(new Flight()
+            {
+                Id = myModel.Id,
+                Rows = myModel.Rows,
+                Columns = myModel.Columns,
+                DepartureDate = myModel.DepartureDate,
+                ArrivalDate = myModel.ArrivalDate,
+                CountryFrom = myModel.CountryFrom,
+                CountryTo = myModel.CountryTo,
+                CommissionRate = myModel.CommissionRate,
+                WholesalePrice = myModel.WholesalePrice,
+          
+             });
+            //TempData["message"] = "Product saved successfully!";
+            return RedirectToAction("ListFlights", "Flights");
+
+        }
+
     }
 }

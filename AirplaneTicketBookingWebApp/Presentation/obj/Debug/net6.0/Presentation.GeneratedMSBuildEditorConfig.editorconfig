@@ -24,6 +24,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xDcmVhdGVGbGlnaHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Flights/EditFlight.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xFZGl0RmxpZ2h0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Flights/FlightDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xGbGlnaHREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Flights/ListFlights.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xMaXN0RmxpZ2h0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
