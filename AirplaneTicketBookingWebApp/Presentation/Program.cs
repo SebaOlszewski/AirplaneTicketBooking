@@ -20,7 +20,7 @@ namespace Presentation
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AirlineDbContext>();
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddScoped(typeof(TicketDbRepository));
             builder.Services.AddScoped(typeof(FlightDbRepository));
 
             var app = builder.Build();

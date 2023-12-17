@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Presentation.Models.ViewModels.Tickets.ListTicketsViewModel>
+
+@{
+    ViewData["Title"] = "ListTickets";
+}
+
+<h1>ListTickets</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Row)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Column)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightFK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PricePaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cancelled)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Row)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Column)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightFK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passport)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cancelled)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @{
+                        var isCanceled = item.Cancelled;
+                        if(isCanceled == false)
+                        {
+                            <a href="/Tickets/Cancel?id=@item.Id" onclick='return confirm("Are you sure you want to delete this flight?")'>Cancel</a>
+                        }
+                        else
+                        {
+                            <t>Cancel |</t>
+                        }
+
+                     }
+                    <a href="/Tickets/DeleteTicket?id=@item.Id" onclick='return confirm("Are you sure you want to delete this ticket? It will also cancel it!")'>Delete</a>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -25,12 +25,12 @@ namespace Data.Repositories
 
         }
 
-        public void Cancel(Ticket chosenTicket)
+        public void Cancel(Guid Id)
         {
-            var originalTicket = GetTickets(chosenTicket.Id);
-            if(originalTicket != null)
-            {    
-                originalTicket.Cancelled = chosenTicket.Cancelled;
+            var ticketToCancel = GetTickets(Id);
+            if(ticketToCancel != null)
+            {
+                ticketToCancel.Cancelled = true;
                 _AirlineDbContext.SaveChanges();
             }
             else
@@ -40,9 +40,28 @@ namespace Data.Repositories
             }
         }
 
-        public Ticket? GetTickets(int  ticketID)
+        public Ticket? GetTickets(Guid  ticketID)
         {
             return _AirlineDbContext.Tickets.SingleOrDefault(x => x.Id == ticketID);
+        }
+
+        public IQueryable<Ticket> GetTickets()
+        {
+            return _AirlineDbContext.Tickets;
+        }
+
+
+        public void DeleteTicket(Guid ticketID)
+        {
+            var ticketToDelete = GetTickets(ticketID);
+            if(ticketToDelete != null)
+            {
+                _AirlineDbContext.Remove(ticketToDelete);
+                _AirlineDbContext.SaveChanges();
+            }else
+            {
+                throw new Exception("No ticket to delete!");
+            }
         }
 
     }

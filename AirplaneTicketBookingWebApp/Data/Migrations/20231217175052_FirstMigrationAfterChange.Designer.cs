@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AirlineDbContext))]
-    [Migration("20231213150115_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20231217175052_FirstMigrationAfterChange")]
+    partial class FirstMigrationAfterChange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,11 +64,9 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Ticket", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Cancelled")
                         .HasColumnType("bit");
