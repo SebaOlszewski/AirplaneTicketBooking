@@ -1,0 +1,87 @@
+﻿@model Presentation.Models.ViewModels.Tickets.EditTicketViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>EditTicketViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <input type="hidden" class="form-control" value="@Model.Id"/>
+                
+            <div class="form-group">
+                <label asp-for="Row" class="control-label"></label>
+                <input asp-for="Row" class="form-control" />
+                <span asp-validation-for="Row" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Column" class="control-label"></label>
+                <input asp-for="Column" class="form-control" />
+                <span asp-validation-for="Column" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Flights from/to</label>
+                <div>
+                    <select name="FlightFK" class="form-select">
+                        @foreach (var flight in Model.Flights)
+                        {
+                            if(flight.Id == Model.FlightFK)
+                            {
+                                <option selected value="@flight.Id">@flight.CountryFrom/@flight.CountryTo</option>
+                            }
+                            else
+                            {
+                                <option value="@flight.Id">@flight.CountryFrom/@flight.CountryTo</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+               
+                <span asp-validation-for="FlightFK" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="PassportImage" class="control-label"></label>
+                <br />
+                <img src="@Model.Image" style="width:100px; height:100px;"/>
+                <br />
+
+                <label>Upload Image:</label> <br /><span style=" font-size:smaller">(Leave blank to keep an old image)</span>
+                <input type="file" name="PassportImage" class="form-control" />
+
+
+
+                <span asp-validation-for="PassportImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PricePaid" class="control-label"></label>
+                <input asp-for="PricePaid" class="form-control" />
+                <span asp-validation-for="PricePaid" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Cancelled" /> @Html.DisplayNameFor(model => model.Cancelled)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListTickets">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

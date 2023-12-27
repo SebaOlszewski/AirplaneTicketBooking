@@ -28,4 +28,9 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="wwwroot\passports\" />
+  </ItemGroup>
+
 </Project>

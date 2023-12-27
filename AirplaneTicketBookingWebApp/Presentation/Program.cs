@@ -1,7 +1,9 @@
 using Data.DataContext;
 using Data.Repositories;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace Presentation
 {
@@ -9,9 +11,13 @@ namespace Presentation
     {
         public static void Main(string[] args)
         {
+         
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<AirlineDbContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -20,8 +26,24 @@ namespace Presentation
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AirlineDbContext>();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(connectionString));
+            //builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
+
+
+
+            //to use the data folder that contains json data files we need to create a path to the file
+
+            string pathToJsonFile = builder.Environment.ContentRootPath + "Data\\" + "flights.json";
+
+
+            //json flight repository
+            //builder.Services.AddScoped<IFlights, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToJsonFile));
+
+
+            //sql flight repository
+            //builder.Services.AddScoped(typeof(FlightDbRepository));
             builder.Services.AddScoped(typeof(TicketDbRepository));
-            builder.Services.AddScoped(typeof(FlightDbRepository));
+            
 
             var app = builder.Build();
 

@@ -64,5 +64,23 @@ namespace Data.Repositories
             }
         }
 
+        public void updateTicket(Ticket ticket)
+        {
+            var originalTicket = GetTickets(ticket.Id);
+            if(originalTicket != null)
+            {
+                originalTicket.Row = ticket.Row;
+                originalTicket.Column = ticket.Column;
+                originalTicket.Flight = ticket.Flight;
+                originalTicket.FlightFK = ticket.FlightFK;
+                originalTicket.PassportImage = ticket.PassportImage;
+                originalTicket.PricePaid = ticket.PricePaid;
+                originalTicket.Cancelled = ticket.Cancelled;
+                _AirlineDbContext.SaveChanges();
+            }
+            
+        }
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Data.DataContext;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class FlightDbRepository
+    public class FlightDbRepository : IFlights
     {
         public AirlineDbContext _AirlineDbContext;
         public FlightDbRepository(AirlineDbContext AirlineDbContext)
@@ -33,6 +34,18 @@ namespace Data.Repositories
         {
             return _AirlineDbContext.Flights;
         }
+
+        public string getCountryFrom(Guid FlightId)
+        {
+            return GetFlights().SingleOrDefault(x => x.Id == FlightId).CountryFrom;
+        }
+
+        public string getCountryTo(Guid FlightId)
+        {
+            return GetFlights().SingleOrDefault(x => x.Id == FlightId).CountryTo;
+        }
+
+
 
         public void DeleteFlight(Guid FlightId)
         {

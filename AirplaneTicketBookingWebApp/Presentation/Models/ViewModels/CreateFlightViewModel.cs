@@ -13,6 +13,7 @@ namespace Presentation.Models.ViewModels
         public DateTime ArrivalDate { get; set; }
         public string CountryFrom { get; set; }
         public string CountryTo { get; set; }
+        public string Owner { get; set; }
 
 
 

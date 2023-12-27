@@ -62,9 +62,9 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Ticket", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Owner")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Cancelled")
                         .HasColumnType("bit");
@@ -75,8 +75,10 @@ namespace Data.Migrations
                     b.Property<Guid>("FlightFK")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Passport")
-                        .IsRequired()
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PassportImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PricePaid")
@@ -85,7 +87,7 @@ namespace Data.Migrations
                     b.Property<int>("Row")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Owner");
 
                     b.HasIndex("FlightFK");
 

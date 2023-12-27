@@ -1,5 +1,6 @@
 ﻿using Data.DataContext;
 using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Models;
@@ -9,8 +10,8 @@ namespace Presentation.Controllers
 {
     public class FlightsController : Controller
     {
-        private FlightDbRepository _flightRepository;
-        public FlightsController(FlightDbRepository flightRepository)
+        private IFlights _flightRepository;
+        public FlightsController(IFlights flightRepository)
         {
             _flightRepository = flightRepository;
         }
@@ -19,20 +20,29 @@ namespace Presentation.Controllers
         //show flights
         public IActionResult ListFlights()
         {
-            IQueryable<Flight> list = _flightRepository.GetFlights().OrderBy(x => x.CountryFrom);
+            try
+            {
+                IQueryable<Flight> list = _flightRepository.GetFlights().OrderBy(x => x.CountryFrom);
 
-            var output = from p in list select new ListFlightsViewModel()
-                            {
-                                Id = p.Id,
-                                Rows = p.Rows,
-                                Columns = p.Columns,
-                                DepartureDate = p.DepartureDate,
-                                ArrivalDate = p.ArrivalDate,
-                                CountryFrom = p.CountryFrom,
-                                CountryTo = p.CountryTo,
-                            };
+                var output = from p in list
+                             select new ListFlightsViewModel()
+                             {
+                                 Id = p.Id,
+                                 Rows = p.Rows,
+                                 Columns = p.Columns,
+                                 DepartureDate = p.DepartureDate,
+                                 ArrivalDate = p.ArrivalDate,
+                                 CountryFrom = p.CountryFrom,
+                                 CountryTo = p.CountryTo,
+                             };
 
-            return View(output);
+                return View(output);
+            }catch (Exception ex)
+            {
+                TempData["error"] = "Error with loading the file!";
+                return RedirectToAction("Index", "Home");
+            }
+            
 
         }
 
@@ -47,17 +57,18 @@ namespace Presentation.Controllers
         [HttpPost]
         public IActionResult CreateFlight(CreateFlightViewModel myModel)
         {
-           
-                _flightRepository.AddFlight(new Flight()
-                {
-                    Rows = myModel.Rows,
-                    Columns = myModel.Columns,
-                    DepartureDate = myModel.DepartureDate,
-                    ArrivalDate = myModel.ArrivalDate,
-                    CountryFrom = myModel.CountryFrom,
-                    CountryTo = myModel.CountryTo,
 
-                });
+            _flightRepository.AddFlight(new Flight()
+            {
+                Rows = myModel.Rows,
+                Columns = myModel.Columns,
+                DepartureDate = myModel.DepartureDate,
+                ArrivalDate = myModel.ArrivalDate,
+                CountryFrom = myModel.CountryFrom,
+                CountryTo = myModel.CountryTo,
+                
+
+            }) ;
                 //TempData["message"] = "Product saved successfully!";
                 return RedirectToAction("ListFlights", "Flights");
            
@@ -69,6 +80,7 @@ namespace Presentation.Controllers
             if(chosenFlight == null)
             {
                 //add information that flight was not found
+                TempData["error"] = "File was not found!";
                 return RedirectToAction("ListFlights", "Flights");
             }
             else
