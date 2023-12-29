@@ -1,6 +1,5 @@
 using Data.DataContext;
 using Data.Repositories;
-using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -41,7 +40,7 @@ namespace Presentation
 
 
             //sql flight repository
-            //builder.Services.AddScoped(typeof(FlightDbRepository));
+            builder.Services.AddScoped(typeof(FlightDbRepository));
             builder.Services.AddScoped(typeof(TicketDbRepository));
             
 

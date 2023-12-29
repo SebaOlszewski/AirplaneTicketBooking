@@ -1,5 +1,4 @@
 ﻿using Data.DataContext;
-using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class FlightDbRepository : IFlights
+    public class FlightDbRepository
     {
         public AirlineDbContext _AirlineDbContext;
         public FlightDbRepository(AirlineDbContext AirlineDbContext)

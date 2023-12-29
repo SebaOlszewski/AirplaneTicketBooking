@@ -1,6 +1,5 @@
 ﻿using Data.DataContext;
 using Data.Repositories;
-using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Models;
@@ -10,8 +9,8 @@ namespace Presentation.Controllers
 {
     public class FlightsController : Controller
     {
-        private IFlights _flightRepository;
-        public FlightsController(IFlights flightRepository)
+        private FlightDbRepository _flightRepository;
+        public FlightsController(FlightDbRepository flightRepository)
         {
             _flightRepository = flightRepository;
         }
