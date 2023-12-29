@@ -7,7 +7,7 @@ namespace Presentation.Models.ViewModels.Tickets
     {
         public Guid Id { get; set; } //we need to know which ticket to edit
 
-        public EditTicketViewModel() { }
+        public EditTicketViewModel(Domain.Interfaces.IFlights _flightsRepository) { }
         public EditTicketViewModel(FlightDbRepository flightRepository)
         {
             Flights = flightRepository.GetFlights(); //populate the list of Categories

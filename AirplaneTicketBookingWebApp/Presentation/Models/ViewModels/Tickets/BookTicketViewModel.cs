@@ -1,4 +1,5 @@
 ﻿using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,13 +7,14 @@ namespace Presentation.Models.ViewModels.Tickets
 {
     public class BookTicketViewModel
     {
-        public Guid Id { get; set; }
-        public BookTicketViewModel() { }
-        public BookTicketViewModel(FlightDbRepository flightRepository)
-        {
-            Flights = flightRepository.GetFlights(); //populate the list of Categories
+        private IFlights flightsRepository;
 
+        public Guid Id { get; set; }
+        public BookTicketViewModel(IFlights flightsRepository)
+        {
+            Flights = flightsRepository.GetFlights(); //populate the list of Categories
         }
+
         public int Row { get; set; }
         public int Column { get; set; }
 

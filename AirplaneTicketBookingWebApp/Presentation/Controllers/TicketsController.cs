@@ -1,5 +1,6 @@
 ﻿using Data.DataContext;
 using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
@@ -12,9 +13,9 @@ namespace Presentation.Controllers
 {
     public class TicketsController : Controller
     {
-        private TicketDbRepository _ticketRepository;
-        private FlightDbRepository _flightsRepository;
-        public TicketsController(TicketDbRepository ticketRepository, FlightDbRepository flightsRepository)
+        private ITickets _ticketRepository;
+        private IFlights _flightsRepository;
+        public TicketsController(ITickets ticketRepository, IFlights flightsRepository)
         {
             _ticketRepository = ticketRepository;
             _flightsRepository = flightsRepository;
@@ -47,7 +48,7 @@ namespace Presentation.Controllers
 
 
         [HttpPost]
-        public IActionResult Book(BookTicketViewModel myModel, [FromServices] IWebHostEnvironment host)
+        public IActionResult Book(BookTicketViewModel myModel, BookTicketViewModel _flightsRepository, [FromServices] IWebHostEnvironment host)
         {
             string photoPath = "";
 
@@ -58,8 +59,8 @@ namespace Presentation.Controllers
                 //creating id name for a photo
                 string photoName = Guid.NewGuid() + System.IO.Path.GetExtension(myModel.PassportImage.FileName);
 
-            //creating an absolute path for not using database as the storage for the images but a folder on a server
-           
+                //creating an absolute path for not using database as the storage for the images but a folder on a server
+
 
                 string absolutePassportPhotoPath = host.WebRootPath + @"\passports\" + photoName;
 
@@ -81,11 +82,12 @@ namespace Presentation.Controllers
                     PassportImage = photoPath,
                     PricePaid = myModel.PricePaid,
                     Owner = User.Identity.Name
-                }) ;
+                });
                 return RedirectToAction("ListTickets", "Tickets");
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                myModel.Flights = _flightsRepository.GetFlights();
+                myModel.Flights = _flightsRepository.Flights;
                 //TempData["message"] = "Product saved successfully!";
                 return RedirectToAction("ListTickets", "Tickets");
             }
@@ -96,8 +98,9 @@ namespace Presentation.Controllers
             try
             {
                 _ticketRepository.Cancel(Id);
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 TempData["error"] = "Ticket was not canceled";
             }
@@ -199,10 +202,10 @@ namespace Presentation.Controllers
                         Column = myModel.Column,
                         PassportImage = photoPath,
                         PricePaid = myModel.PricePaid,
-                        
 
-                     });
-                   
+
+                    });
+
 
                     return RedirectToAction("ListTickets");
                 }
@@ -239,7 +242,7 @@ namespace Presentation.Controllers
                     CountryFrom = _flightsRepository.getCountryFrom(chosenTicket.FlightFK),
                     CountryTo = _flightsRepository.getCountryTo(chosenTicket.FlightFK),
                     Passport = chosenTicket.PassportImage,
-                    PricePaid= chosenTicket.PricePaid,
+                    PricePaid = chosenTicket.PricePaid,
                     Cancelled = chosenTicket.Cancelled
                 };
                 return View(flightModel);

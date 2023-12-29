@@ -263,3 +263,4 @@ C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebA
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\obj\Debug\net6.0\Presentation.genruntimeconfig.cache
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\obj\Debug\net6.0\ref\Presentation.dll
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Data\flights.json
+C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Data\tickets.json

@@ -33,13 +33,13 @@ namespace Presentation
 
             //to use the data folder that contains json data files we need to create a path to the file
 
-            string pathToJsonFile = builder.Environment.ContentRootPath + "Data\\" + "flights.json";
-
+            string pathToFlightJsonFile = builder.Environment.ContentRootPath + "Data\\" + "flights.json";
+            string pathToTicketJsonFile = builder.Environment.ContentRootPath + "Data\\" + "tickets.json";
 
             //json flight repository
-           
-            builder.Services.AddScoped<IFlights, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToJsonFile));
 
+            builder.Services.AddScoped<IFlights, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToFlightJsonFile));
+            builder.Services.AddScoped<ITickets, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
 
             //sql flight repository
             builder.Services.AddScoped(typeof(FlightDbRepository));

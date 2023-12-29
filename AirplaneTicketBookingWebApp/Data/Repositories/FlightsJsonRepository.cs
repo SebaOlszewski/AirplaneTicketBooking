@@ -85,12 +85,18 @@ namespace Data.Repositories
 
         public string getCountryFrom(Guid FlightId)
         {
-            return GetFlights().SingleOrDefault(x => x.Id == FlightId).CountryFrom;
+            var list = GetFlights().ToList();
+            var chosenFlightCountryFrom = list.FirstOrDefault(f => f.Id == FlightId).CountryFrom;
+
+            return chosenFlightCountryFrom;
         }
 
         public string getCountryTo(Guid FlightId)
         {
-            return GetFlights().SingleOrDefault(x => x.Id == FlightId).CountryTo;
+            var list = GetFlights().ToList();
+            var chosenFlightCountryTo = list.FirstOrDefault(f => f.Id == FlightId).CountryTo;
+
+            return chosenFlightCountryTo;
         }
 
         public Flight? GetFlights(Guid FlightId)

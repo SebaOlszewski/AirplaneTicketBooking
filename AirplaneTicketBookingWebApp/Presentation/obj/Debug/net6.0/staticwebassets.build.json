@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5D05w8OC824wbtXJetPRhGhFZ7e5uXzJgJblMM9u7EM=",
+  "Hash": "VP1YiePTAhRta3Re1YliW4miGrcDDto6K7p1AWMeEAY=",
   "Source": "Presentation",
   "BasePath": "_content/Presentation",
   "Mode": "Default",
@@ -2106,6 +2106,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\passports\\54506063-10bc-495c-866b-af9ec89d48f1.png"
+    },
+    {
+      "Identity": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\b019519a-9ea4-48fa-a50a-84af7d7486ae.png",
+      "SourceId": "Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\",
+      "BasePath": "_content/Presentation",
+      "RelativePath": "passports/b019519a-9ea4-48fa-a50a-84af7d7486ae.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\passports\\b019519a-9ea4-48fa-a50a-84af7d7486ae.png"
+    },
+    {
+      "Identity": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\b36defc2-2015-4f64-a0b2-d559da91dc10.png",
+      "SourceId": "Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\",
+      "BasePath": "_content/Presentation",
+      "RelativePath": "passports/b36defc2-2015-4f64-a0b2-d559da91dc10.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\passports\\b36defc2-2015-4f64-a0b2-d559da91dc10.png"
     }
   ]
 }
