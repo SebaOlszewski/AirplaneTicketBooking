@@ -9,17 +9,26 @@ using Microsoft.Extensions.Primitives;
 using System.Text.Json;
 using System.Xml;
 using Microsoft.AspNetCore.Mvc;
+using Domain.Interfaces;
+using Data.DataContext;
 
 namespace Data.Repositories
 {
 
-    public class FlightsJsonRepository
+    public class FlightsJsonRepository : IFlights
     {
+        public IFlights _AirlineDbContext;
+        public FlightsJsonRepository(IFlights AirlineDbContext)
+        {
+            _AirlineDbContext = AirlineDbContext;
+        }
+
+
         private string _path;
         public FlightsJsonRepository(string path)
         {
             _path = path;
-            if(File.Exists(_path) == false)
+            if (File.Exists(_path) == false)
             {
                 File.Create(_path).Close();
             }
@@ -27,7 +36,7 @@ namespace Data.Repositories
         }
 
         public void AddFlight(Flight newFlight)
-        {            
+        {
             newFlight.Id = Guid.NewGuid();
             var list = GetFlights().ToList();
             list.Add(newFlight);
@@ -37,28 +46,51 @@ namespace Data.Repositories
             try
             {
                 File.WriteAllText(_path, allFLightsText);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error while adding a flight");
             }
-            
+
 
 
         }
 
         public void DeleteFlight(Guid FlightId)
         {
-            throw new NotImplementedException();
+            var list = GetFlights().ToList();
+            var flightToDelete = list.FirstOrDefault(f => f.Id == FlightId);
+
+           
+
+            if (flightToDelete != null)
+            {
+                try
+                {
+                    list.Remove(flightToDelete);
+                    var allFLightsText = JsonSerializer.Serialize(list);
+                    File.WriteAllText(_path, allFLightsText);
+                   
+                }catch(Exception ex)
+                {
+                    throw new Exception("Error while deleteting a flight");
+                }
+
+            }else
+            {
+                throw new Exception("Flight not found");
+            }
+
         }
 
         public string getCountryFrom(Guid FlightId)
         {
-            throw new NotImplementedException();
+            return GetFlights().SingleOrDefault(x => x.Id == FlightId).CountryFrom;
         }
 
         public string getCountryTo(Guid FlightId)
         {
-            throw new NotImplementedException();
+            return GetFlights().SingleOrDefault(x => x.Id == FlightId).CountryTo;
         }
 
         public Flight? GetFlights(Guid FlightId)
@@ -89,13 +121,13 @@ namespace Data.Repositories
                     }
                     else
                     {
-                        
+
                         List<Flight> myFlights = JsonSerializer.Deserialize<List<Flight>>(allText); //converts from json string to an object
                         return myFlights.AsQueryable();
                     }
-                    
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw new Exception("Error while opening the file");
                 }
@@ -105,7 +137,37 @@ namespace Data.Repositories
 
         public void UpdateFlight(Flight chosenFlight)
         {
-            throw new NotImplementedException();
+
+            var list = GetFlights().ToList();
+            var flightToUpdate = list.FirstOrDefault(f => f.Id == chosenFlight.Id);
+
+            if (flightToUpdate != null)
+            {
+                flightToUpdate.Rows = chosenFlight.Rows;
+                flightToUpdate.Columns = chosenFlight.Columns;
+                flightToUpdate.DepartureDate = chosenFlight.DepartureDate;
+                flightToUpdate.ArrivalDate = chosenFlight.ArrivalDate;
+                flightToUpdate.CountryFrom = chosenFlight.CountryFrom;
+                flightToUpdate.CountryTo = chosenFlight.CountryTo;
+                flightToUpdate.WholesalePrice = chosenFlight.WholesalePrice;
+                flightToUpdate.CommissionRate = chosenFlight.CommissionRate;
+                try
+                {
+                    var allFlightsText = JsonSerializer.Serialize(list);
+                    File.WriteAllText(_path, allFlightsText);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while updating a flight", ex);
+                }
+            }
+            else
+            {
+                throw new Exception($"Flight with ID {chosenFlight.Id} not found.");
+            }
+
+
         }
+
     }
 }

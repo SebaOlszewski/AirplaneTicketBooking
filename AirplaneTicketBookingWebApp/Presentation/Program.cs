@@ -1,5 +1,6 @@
 using Data.DataContext;
 using Data.Repositories;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -36,7 +37,8 @@ namespace Presentation
 
 
             //json flight repository
-            //builder.Services.AddScoped<IFlights, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToJsonFile));
+           
+            builder.Services.AddScoped<IFlights, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToJsonFile));
 
 
             //sql flight repository

@@ -1,4 +1,5 @@
 ﻿using Data.DataContext;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
