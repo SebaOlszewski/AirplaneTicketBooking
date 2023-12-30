@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VP1YiePTAhRta3Re1YliW4miGrcDDto6K7p1AWMeEAY=",
+  "Hash": "ickE0okkFRnGFNL4o31v1iKd7stXgn46ae1q7OcXf3Y=",
   "Source": "Presentation",
   "BasePath": "_content/Presentation",
   "Mode": "Default",
@@ -2106,6 +2106,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\passports\\54506063-10bc-495c-866b-af9ec89d48f1.png"
+    },
+    {
+      "Identity": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\626fcc25-0bfb-475d-9e70-d9ebfe049066.png",
+      "SourceId": "Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\",
+      "BasePath": "_content/Presentation",
+      "RelativePath": "passports/626fcc25-0bfb-475d-9e70-d9ebfe049066.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\passports\\626fcc25-0bfb-475d-9e70-d9ebfe049066.png"
     },
     {
       "Identity": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\b019519a-9ea4-48fa-a50a-84af7d7486ae.png",
