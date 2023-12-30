@@ -11,7 +11,7 @@ namespace Presentation.Models.ViewModels.Tickets
         public Guid Id { get; set; }
 
         public ListTicketsViewModel() { }
-        public ListTicketsViewModel(IFlights flightRepository)
+        public ListTicketsViewModel(IFlightRepository flightRepository)
         {
             Flights = flightRepository.GetFlights(); //populate the list of Categories
 

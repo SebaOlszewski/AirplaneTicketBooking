@@ -7,19 +7,24 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface ITickets
+    public interface ITicketRepository
     {
+        
         void Book(Ticket newTicket);
 
         void Cancel(Guid Id);
 
+
         Ticket? GetTickets(Guid ticketID);
 
+
         IQueryable<Ticket> GetTickets();
+
 
         void DeleteTicket(Guid ticketID);
 
         void updateTicket(Ticket ticket);
+        
 
     }
 }

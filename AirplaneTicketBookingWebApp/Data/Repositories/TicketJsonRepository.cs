@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class TicketJsonRepository : ITickets
+    public class TicketJsonRepository : ITicketRepository
     {
 
 

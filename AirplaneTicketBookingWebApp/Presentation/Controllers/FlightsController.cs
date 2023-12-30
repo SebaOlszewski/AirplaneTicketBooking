@@ -10,13 +10,21 @@ namespace Presentation.Controllers
 {
     public class FlightsController : Controller
     {
+        /*
         private IFlights _flightRepository;
-
-
         public FlightsController(IFlights flightRepository)
         {
             _flightRepository = flightRepository;
         }
+        */
+
+        ///*
+        private IFlightRepository _flightRepository;
+        public FlightsController(IFlightRepository flightRepository)
+        {
+            _flightRepository = flightRepository;
+        }
+        //*/
 
 
         //show flights

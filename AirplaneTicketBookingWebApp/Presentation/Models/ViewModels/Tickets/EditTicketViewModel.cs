@@ -1,16 +1,20 @@
 ﻿using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 
 namespace Presentation.Models.ViewModels.Tickets
 {
     public class EditTicketViewModel
     {
+        private ITicketRepository flightsRepository;
+        private IFlightRepository flightRepository;
+
         public Guid Id { get; set; } //we need to know which ticket to edit
 
-        public EditTicketViewModel(Domain.Interfaces.IFlights _flightsRepository) { }
-        public EditTicketViewModel(FlightDbRepository flightRepository)
+        public EditTicketViewModel() { }
+        public EditTicketViewModel(IFlightRepository flightRepository)
         {
-            Flights = flightRepository.GetFlights(); //populate the list of Categories
+            Flights = flightRepository.GetFlights(); //populate the list of flights
 
         }
         public int Row { get; set; }

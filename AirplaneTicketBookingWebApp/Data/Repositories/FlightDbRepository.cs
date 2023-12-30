@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class FlightDbRepository
+    public class FlightDbRepository : IFlightRepository
     {
         public AirlineDbContext _AirlineDbContext;
         public FlightDbRepository(AirlineDbContext AirlineDbContext)

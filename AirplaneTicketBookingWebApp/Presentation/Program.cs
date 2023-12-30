@@ -38,13 +38,14 @@ namespace Presentation
 
             //json flight repository
 
-            builder.Services.AddScoped<IFlights, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToFlightJsonFile));
-            builder.Services.AddScoped<ITickets, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
+            builder.Services.AddScoped<IFlightRepository, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToFlightJsonFile));
+            builder.Services.AddScoped<ITicketRepository, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
 
             //sql flight repository
-            builder.Services.AddScoped(typeof(FlightDbRepository));
-            builder.Services.AddScoped(typeof(TicketDbRepository));
-            
+
+            //builder.Services.AddScoped<IFlightRepository, FlightDbRepository>();
+            //builder.Services.AddScoped<ITicketRepository, TicketDbRepository>();
+
 
             var app = builder.Build();
 

@@ -15,10 +15,10 @@ using Data.DataContext;
 namespace Data.Repositories
 {
 
-    public class FlightsJsonRepository : IFlights
+    public class FlightsJsonRepository : IFlightRepository
     {
-        public IFlights _AirlineDbContext;
-        public FlightsJsonRepository(IFlights AirlineDbContext)
+        public IFlightRepository _AirlineDbContext;
+        public FlightsJsonRepository(IFlightRepository AirlineDbContext)
         {
             _AirlineDbContext = AirlineDbContext;
         }

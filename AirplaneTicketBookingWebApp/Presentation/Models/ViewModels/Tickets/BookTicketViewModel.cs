@@ -7,12 +7,12 @@ namespace Presentation.Models.ViewModels.Tickets
 {
     public class BookTicketViewModel
     {
-        private IFlights flightsRepository;
+        private ITicketRepository flightsRepository;
 
         public Guid Id { get; set; }
 
         public BookTicketViewModel() { }
-        public BookTicketViewModel(IFlights flightsRepository)
+        public BookTicketViewModel(IFlightRepository flightsRepository)
         {
             Flights = flightsRepository.GetFlights(); //populate the list of Categories
         }

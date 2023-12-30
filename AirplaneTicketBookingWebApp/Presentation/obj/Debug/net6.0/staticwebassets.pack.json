@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\1460e9ab-3215-4c4e-8cf8-b00f8950459d.png",
+      "PackagePath": "staticwebassets\\passports\\1460e9ab-3215-4c4e-8cf8-b00f8950459d.png"
+    },
+    {
       "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\54506063-10bc-495c-866b-af9ec89d48f1.png",
       "PackagePath": "staticwebassets\\passports\\54506063-10bc-495c-866b-af9ec89d48f1.png"
     },

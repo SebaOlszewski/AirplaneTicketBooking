@@ -13,9 +13,10 @@ namespace Presentation.Controllers
 {
     public class TicketsController : Controller
     {
-        private ITickets _ticketRepository;
-        private IFlights _flightsRepository;
-        public TicketsController(ITickets ticketRepository, IFlights flightsRepository)
+        
+        private ITicketRepository _ticketRepository;
+        private IFlightRepository _flightsRepository;
+        public TicketsController(ITicketRepository ticketRepository, IFlightRepository flightsRepository)
         {
             _ticketRepository = ticketRepository;
             _flightsRepository = flightsRepository;
