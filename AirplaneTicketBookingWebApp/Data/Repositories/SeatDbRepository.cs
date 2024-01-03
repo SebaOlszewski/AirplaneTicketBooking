@@ -1,5 +1,4 @@
 ﻿using Data.DataContext;
-using Domain.Interfaces;
 using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -9,25 +8,25 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class SeatDbRepository : ISeatRepository
+    public class SeatDbRepository
     {
-        
+
         public AirlineDbContext _AirlineDbContext;
         public SeatDbRepository(AirlineDbContext AirlineDbContext)
         {
             _AirlineDbContext = AirlineDbContext;
         }
 
-        public void CreateSeat(Seat newSeat)
+        public void AddSeat(Seat newSeat)
         {
             _AirlineDbContext.Seats.Add(newSeat);
             _AirlineDbContext.SaveChanges();
-
         }
+
 
         public Seat? GetSeat(Guid seatId)
         {
-            return _AirlineDbContext.Seats.SingleOrDefault(x => x.Id == seatId);
+            return GetSeats().SingleOrDefault(x => x.Id == seatId);
         }
 
         public IQueryable<Seat> GetSeats()
@@ -35,35 +34,37 @@ namespace Data.Repositories
             return _AirlineDbContext.Seats;
         }
 
-        public void DeleteSeat(Guid seatId)
+
+        public void deleteSeat(Guid seatId)
         {
-            var seatToDelete = GetSeat(seatId);
-            if (seatToDelete != null)
+            var seaetToDelete = GetSeat(seatId);
+            if (seaetToDelete != null)
             {
-                _AirlineDbContext.Remove(seatToDelete);
+                _AirlineDbContext.Remove(seaetToDelete);
                 _AirlineDbContext.SaveChanges();
             }
             else
             {
-                throw new Exception("No ticket to delete!");
+                throw new Exception("No seat to delete");
             }
         }
 
-        public void TakeSeat(Guid Id)
+        public void updateSeat(Seat chosenSeat)
         {
-            var seatToTake = GetSeat(Id);
-            if (seatToTake != null)
+            var seatToUpdate = GetSeat(chosenSeat.Id);
+            if (seatToUpdate != null)
             {
-                seatToTake.Taken = true;
+                seatToUpdate.Row = chosenSeat.Row;
+                seatToUpdate.Column = chosenSeat.Column;
+                seatToUpdate.FlightFk = chosenSeat.FlightFk;
+                seatToUpdate.isTaken = chosenSeat.isTaken;
                 _AirlineDbContext.SaveChanges();
             }
             else
             {
-                seatToTake.Taken = false;
-                _AirlineDbContext.SaveChanges();
-                            }
+                throw new Exception("No seat to update");
+            }
         }
-
 
     }
 }

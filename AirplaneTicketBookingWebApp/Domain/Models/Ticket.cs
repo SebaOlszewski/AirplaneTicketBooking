@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,22 +13,16 @@ namespace Domain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
-
-        
         public Guid Id { get; set; }
-        public string? Owner { get; set; }
-        public int Row {  get; set; }
-        public int Column { get; set; }
 
-        [ForeignKey("Flight")]
-        public Guid FlightFK { get; set; }       //Foreigh key
+        [ForeignKey("Seat")]
+        public Guid SeatFk { get; set; }       //Foreigh key
 
-        public virtual Flight Flight { get; set; }  //Navigational
-        public string? PassportImage { get; set; }
+        public virtual Seat Seat { get; set; }  //Navigational
+
+        public string PassportImage { get; set; } = string.Empty;
+
         public double PricePaid { get; set; }
         public bool Cancelled { get; set; } = false;
-
-
-
     }
 }

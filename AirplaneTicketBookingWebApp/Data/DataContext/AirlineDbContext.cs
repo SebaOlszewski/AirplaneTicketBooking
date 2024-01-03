@@ -16,11 +16,11 @@ namespace Data.DataContext
         {
         }
 
-        public DbSet<Seat> Seats { get; set; }
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<Seat> Seats { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

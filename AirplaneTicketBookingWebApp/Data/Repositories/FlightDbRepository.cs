@@ -1,7 +1,5 @@
 ﻿using Data.DataContext;
-using Domain.Interfaces;
 using Domain.Models;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class FlightDbRepository : IFlightRepository
+    public class FlightDbRepository
     {
         public AirlineDbContext _AirlineDbContext;
         public FlightDbRepository(AirlineDbContext AirlineDbContext)
@@ -25,7 +23,7 @@ namespace Data.Repositories
         }
 
 
-        public Flight? GetFlights(Guid FlightId)
+        public Flight? GetFlight(Guid FlightId)
         {
             return GetFlights().SingleOrDefault(x => x.Id == FlightId);
         }
@@ -49,7 +47,7 @@ namespace Data.Repositories
 
         public void DeleteFlight(Guid FlightId)
         {
-            var flightToDelete = GetFlights(FlightId);
+            var flightToDelete = GetFlight(FlightId);
             if (flightToDelete != null)
             {
                 _AirlineDbContext.Remove(flightToDelete);
@@ -57,13 +55,13 @@ namespace Data.Repositories
             }
             else
             {
-                throw new Exception("No product to delete");
+                throw new Exception("No flight to delete");
             }
         }
 
         public void UpdateFlight(Flight chosenFlight)
         {
-            var flightToUpdate = GetFlights(chosenFlight.Id);
+            var flightToUpdate = GetFlight(chosenFlight.Id);
             if (flightToUpdate != null)
             {
                 flightToUpdate.Rows = chosenFlight.Rows;
@@ -81,6 +79,17 @@ namespace Data.Repositories
                 throw new Exception("No product to update");
             }
         }
+
+        public int GetRows(Guid FlightId)
+        {
+            return GetFlights().SingleOrDefault(x => x.Id == FlightId).Rows;
+        }
+
+        public int GetColumns(Guid FlightId)
+        {
+            return GetFlights().SingleOrDefault(x => x.Id == FlightId).Columns;
+        }
+
 
     }
 }
