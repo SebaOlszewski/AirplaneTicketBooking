@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AirlineDbContext))]
-    [Migration("20231217175052_FirstMigrationAfterChange")]
-    partial class FirstMigrationAfterChange
+    [Migration("20240103035543_First-Migration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,34 @@ namespace Data.Migrations
                     b.ToTable("Flights");
                 });
 
+            modelBuilder.Entity("Domain.Models.Seat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Column")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("FlightFK")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Owner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Taken")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightFK");
+
+                    b.ToTable("Seats");
+                });
+
             modelBuilder.Entity("Domain.Models.Ticket", b =>
                 {
                     b.Property<Guid>("Id")
@@ -77,8 +105,10 @@ namespace Data.Migrations
                     b.Property<Guid>("FlightFK")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Passport")
-                        .IsRequired()
+                    b.Property<string>("Owner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassportImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PricePaid")
@@ -294,6 +324,17 @@ namespace Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Models.Seat", b =>
+                {
+                    b.HasOne("Domain.Models.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FlightFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
                 });
 
             modelBuilder.Entity("Domain.Models.Ticket", b =>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class FirstMigrationAfterChange : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -174,14 +174,37 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Seats",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Owner = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Row = table.Column<int>(type: "int", nullable: false),
+                    Column = table.Column<int>(type: "int", nullable: false),
+                    FlightFK = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Taken = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Seats", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Seats_Flights_FlightFK",
+                        column: x => x.FlightFK,
+                        principalTable: "Flights",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Owner = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Row = table.Column<int>(type: "int", nullable: false),
                     Column = table.Column<int>(type: "int", nullable: false),
                     FlightFK = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Passport = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PassportImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PricePaid = table.Column<double>(type: "float", nullable: false),
                     Cancelled = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -236,6 +259,11 @@ namespace Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Seats_FlightFK",
+                table: "Seats",
+                column: "FlightFK");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tickets_FlightFK",
                 table: "Tickets",
                 column: "FlightFK");
@@ -257,6 +285,9 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Seats");
 
             migrationBuilder.DropTable(
                 name: "Tickets");

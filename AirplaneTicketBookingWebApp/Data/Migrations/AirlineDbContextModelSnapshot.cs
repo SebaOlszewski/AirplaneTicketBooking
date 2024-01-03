@@ -60,11 +60,39 @@ namespace Data.Migrations
                     b.ToTable("Flights");
                 });
 
+            modelBuilder.Entity("Domain.Models.Seat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Column")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("FlightFK")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Owner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Taken")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightFK");
+
+                    b.ToTable("Seats");
+                });
+
             modelBuilder.Entity("Domain.Models.Ticket", b =>
                 {
-                    b.Property<string>("Owner")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Cancelled")
                         .HasColumnType("bit");
@@ -75,8 +103,8 @@ namespace Data.Migrations
                     b.Property<Guid>("FlightFK")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Owner")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PassportImage")
                         .HasColumnType("nvarchar(max)");
@@ -87,7 +115,7 @@ namespace Data.Migrations
                     b.Property<int>("Row")
                         .HasColumnType("int");
 
-                    b.HasKey("Owner");
+                    b.HasKey("Id");
 
                     b.HasIndex("FlightFK");
 
@@ -294,6 +322,17 @@ namespace Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Models.Seat", b =>
+                {
+                    b.HasOne("Domain.Models.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FlightFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
                 });
 
             modelBuilder.Entity("Domain.Models.Ticket", b =>
