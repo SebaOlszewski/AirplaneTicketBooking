@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\images\\seat.png",
+      "PackagePath": "staticwebassets\\images\\seat.png"
+    },
+    {
+      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\images\\taken_seat.jpg",
+      "PackagePath": "staticwebassets\\images\\taken_seat.jpg"
+    },
+    {
       "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
@@ -253,8 +261,20 @@
       "PackagePath": "staticwebassets\\passports\\54506063-10bc-495c-866b-af9ec89d48f1.png"
     },
     {
+      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\5f0bd7b9-bce5-468a-81ed-132dd314ee68.png",
+      "PackagePath": "staticwebassets\\passports\\5f0bd7b9-bce5-468a-81ed-132dd314ee68.png"
+    },
+    {
       "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\626fcc25-0bfb-475d-9e70-d9ebfe049066.png",
       "PackagePath": "staticwebassets\\passports\\626fcc25-0bfb-475d-9e70-d9ebfe049066.png"
+    },
+    {
+      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\71254d23-5f11-4e27-98a8-c5451e1f65f0.png",
+      "PackagePath": "staticwebassets\\passports\\71254d23-5f11-4e27-98a8-c5451e1f65f0.png"
+    },
+    {
+      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\7e5c6a89-e625-461b-a5fd-1ed217e5fd30.png",
+      "PackagePath": "staticwebassets\\passports\\7e5c6a89-e625-461b-a5fd-1ed217e5fd30.png"
     },
     {
       "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\b019519a-9ea4-48fa-a50a-84af7d7486ae.png",

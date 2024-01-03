@@ -16,8 +16,7 @@ namespace Domain.Models
 
         public Guid Id { get; set; }
         public string? Owner { get; set; }
-        public int Row { get; set; }
-        public int Column { get; set; }
+        
 
         [ForeignKey("Flight")]
         public Guid FlightFK { get; set; }       //Foreigh key
@@ -25,6 +24,11 @@ namespace Domain.Models
         public virtual Flight Flight { get; set; }  //Navigational
 
         public bool Taken { get; set; } = false;
+
+        public string RowCol { get { return Row + "|" + Column; } }
+
+        public int Row { get; set; }
+        public int Column { get; set; }
 
     }
 }

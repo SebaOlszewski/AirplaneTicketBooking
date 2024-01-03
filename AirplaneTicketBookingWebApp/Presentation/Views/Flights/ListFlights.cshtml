@@ -39,7 +39,10 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-             
+            
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td hidden>
                 @Html.DisplayFor(modelItem => item.Rows)
             </td>
@@ -59,8 +62,10 @@
                 @Html.DisplayFor(modelItem => item.CountryTo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditFlight", new { id=item.Id }) |
-                @Html.ActionLink("Details", "FlightDetails", new { id=item.Id }) |
+                    @Html.ActionLink("Book", "Book","Tickets", new { chosenFlightId=item.Id }) |
+                    <a href="/Tickets/Book?chosenFlightId=@item.Id">Book</a>
+                    @Html.ActionLink("Edit", "EditFlight", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "FlightDetails","Flights", new { id=item.Id }) |
                     @*Html.ActionLink("Delete", "DeleteFlight",  new { id=item.Id } )*@
                 <a href="/Flights/DeleteFlight?id=@item.Id" onclick='return confirm("Are you sure you want to delete this flight?")'>Delete</a>
             </td>

@@ -11,6 +11,7 @@ namespace Data.Repositories
 {
     public class SeatDbRepository : ISeatRepository
     {
+        
         public AirlineDbContext _AirlineDbContext;
         public SeatDbRepository(AirlineDbContext AirlineDbContext)
         {
@@ -48,6 +49,20 @@ namespace Data.Repositories
             }
         }
 
+        public void TakeSeat(Guid Id)
+        {
+            var seatToTake = GetSeat(Id);
+            if (seatToTake != null)
+            {
+                seatToTake.Taken = true;
+                _AirlineDbContext.SaveChanges();
+            }
+            else
+            {
+                seatToTake.Taken = false;
+                _AirlineDbContext.SaveChanges();
+                            }
+        }
 
 
     }

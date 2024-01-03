@@ -26,7 +26,9 @@ namespace Presentation.Models.ViewModels.Tickets
         public string? Image { get; set; }
         public IFormFile PassportImage { get; set; }
         public double PricePaid { get; set; }
+        public List<Seat> SeatingList { get; set; }
 
-        public bool Cancelled { get; set; } = false;
+        public int maxColumn { get; set; }
+        public int maxRow { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace Presentation.Models.ViewModels
 {
     public class CreateFlightViewModel
     {
+        public CreateFlightViewModel() { }
         public int Rows { get; set; }
         public int Columns { get; set; }
         public DateTime DepartureDate { get; set; }
         public DateTime ArrivalDate { get; set; }
         public string CountryFrom { get; set; }
         public string CountryTo { get; set; }
-        public string Owner { get; set; }
 
 
 

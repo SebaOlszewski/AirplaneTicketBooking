@@ -30,6 +30,8 @@ namespace Presentation.Models.ViewModels.Tickets
         public string Passport { get; set; }
         public double PricePaid { get; set; }
         public bool Cancelled { get; set; }
+        public int maxColumn { get; set; }
+        public int maxRow { get; set; }
 
     }
 }

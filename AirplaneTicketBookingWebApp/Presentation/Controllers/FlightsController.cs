@@ -3,6 +3,8 @@ using Data.Repositories;
 using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Presentation.Models;
 using Presentation.Models.ViewModels;
 
@@ -10,24 +12,14 @@ namespace Presentation.Controllers
 {
     public class FlightsController : Controller
     {
-        /*
-        private IFlights _flightRepository;
-        public FlightsController(IFlights flightRepository)
-        {
-            _flightRepository = flightRepository;
-        }
-        */
-
-        ///*
         private IFlightRepository _flightRepository;
-        public FlightsController(IFlightRepository flightRepository)
+        private AirlineDbContext _airlineDbContext;
+        public FlightsController(IFlightRepository flightRepository, AirlineDbContext airlineDbContext)
         {
             _flightRepository = flightRepository;
+            _airlineDbContext = airlineDbContext;
         }
-        //*/
 
-
-        //show flights
         public IActionResult ListFlights()
         {
             try
@@ -78,11 +70,18 @@ namespace Presentation.Controllers
                 CountryTo = myModel.CountryTo,
                 
 
-            }) ;
-                //TempData["message"] = "Product saved successfully!";
-                return RedirectToAction("ListFlights", "Flights");
+            });
+
+            TempData["message"] = "Flight created successfully!";
+            return RedirectToAction("ListFlights", "Flights");
            
         }
+
+        private void CreateSeatsForFlight(Guid flightId, AirlineDbContext airline)
+        {
+
+        }
+
 
         public IActionResult FlightDetails(Guid Id)
         {
@@ -125,7 +124,7 @@ namespace Presentation.Controllers
 
             return RedirectToAction("ListFlights", "Flights");
 
-        }
+            }
 
 
         [HttpGet]

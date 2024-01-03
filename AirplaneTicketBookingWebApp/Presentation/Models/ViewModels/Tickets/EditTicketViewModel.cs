@@ -20,12 +20,15 @@ namespace Presentation.Models.ViewModels.Tickets
         public int Row { get; set; }
         public int Column { get; set; }
 
+        public int maxColumn { get; set; }
+        public int maxRow { get; set; }
+
         public IQueryable<Flight> Flights { get; set; }
         public Guid FlightFK { get; set; }       //Foreigh key
         public string? Image { get; set; }
         public IFormFile PassportImage { get; set; }
         public double PricePaid { get; set; }
-
         public bool Cancelled { get; set; }
+       
     }
 }

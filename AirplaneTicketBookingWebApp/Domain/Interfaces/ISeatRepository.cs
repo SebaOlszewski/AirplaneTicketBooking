@@ -14,7 +14,7 @@ namespace Domain.Interfaces
          IQueryable<Seat> GetSeats();
 
          void DeleteSeat(Guid seatId);
-        
 
+        void TakeSeat(Guid Id);
     }
 }
