@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Presentation.Models.ViewModels.Flight.ListFlightsViewModel>
+
+@{
+    ViewData["Title"] = "ListFlights";
+}
+
+<h1>ListFlights</h1>
+
+<p>
+    <a asp-action="CreateFlight">Create New Flight</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.Rows)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.Columns)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalDate)
+            </th>
+            
+            
+            <th hidden>
+                @Html.DisplayNameFor(model => model.WholesalePrice)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.CommissionRate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+             <td hidden>
+                @Html.DisplayFor(modelItem => item.Rows)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.Columns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalDate)
+            </td>            
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.WholesalePrice)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.CommissionRate)
+            </td>
+
+            <td>
+                @Html.ActionLink("Book","BookTicket", "Ticket", new { chosenFlightId=item.Id }) |
+                @Html.ActionLink("Edit", "EditFlight", new { id=item.Id }) |
+                @Html.ActionLink("Details", "FlightDetails", new { id=item.Id }) |
+                <a href="/Flight/DeleteFlight?Id=@item.Id" onclick='return confirm("Are you sure you want to delete this flight?")'>Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

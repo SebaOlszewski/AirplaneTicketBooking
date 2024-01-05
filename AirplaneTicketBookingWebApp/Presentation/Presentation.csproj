@@ -29,8 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Data\" />
+    <Folder Include="Views\Tickets\" />
+    <Folder Include="Views\Seats\" />
     <Folder Include="wwwroot\passports\" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using Data.DataContext;
 using Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +25,38 @@ namespace Data.Repositories
         }
 
 
+        
+
         public Seat? GetSeat(Guid seatId)
         {
             return GetSeats().SingleOrDefault(x => x.Id == seatId);
+        }
+
+        public IQueryable<Seat> GetAllTheSeatsFromAFlight(Guid flightId)
+        {
+            return _AirlineDbContext.Seats.Where(x => x.FlightFk == flightId);
         }
 
         public IQueryable<Seat> GetSeats()
         {
             return _AirlineDbContext.Seats;
         }
+        
+        public int getMaxRowsFromAFlight(Guid flightID)
+        {
+            var seatsInFlight = GetAllTheSeatsFromAFlight(flightID);
+            int maxRow = seatsInFlight.Max(x => x.Row);
+            return maxRow;
+        }
+
+        public int getMaxColumnsFromAFlight(Guid flightID)
+        {
+            var seatsInFlight = GetAllTheSeatsFromAFlight(flightID);
+            int maxColumn = seatsInFlight.Max(x => x.Column);
+            return maxColumn;
+        }
+
+        
 
 
         public void deleteSeat(Guid seatId)
@@ -49,6 +73,25 @@ namespace Data.Repositories
             }
         }
 
+        public void deleteChosenSeatInAFlight(Guid flightId, int col, int row)
+        {
+            var seatToDelete = GetSeats().SingleOrDefault(x => x.FlightFk == flightId && x.Column == col && x.Row == row);
+            
+            if (seatToDelete != null)
+            {
+                
+                _AirlineDbContext.Remove(seatToDelete);
+                _AirlineDbContext.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("No seat to delete");
+            }
+        }
+
+
+
+
         public void updateSeat(Seat chosenSeat)
         {
             var seatToUpdate = GetSeat(chosenSeat.Id);
@@ -58,6 +101,32 @@ namespace Data.Repositories
                 seatToUpdate.Column = chosenSeat.Column;
                 seatToUpdate.FlightFk = chosenSeat.FlightFk;
                 seatToUpdate.isTaken = chosenSeat.isTaken;
+                _AirlineDbContext.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("No seat to update");
+            }
+        }
+
+        public bool isSeatTaken(Guid seatId)
+        {
+            var seatToUpdate = GetSeat(seatId);
+
+            if(seatToUpdate.isTaken == true)
+            {
+                return true;
+            }
+            return false;
+            
+        }
+
+        public void takeSeat(Guid seatId)
+        {
+            var seatToUpdate = GetSeat(seatId);
+            if (seatToUpdate != null)
+            {
+                seatToUpdate.isTaken = true;
                 _AirlineDbContext.SaveChanges();
             }
             else

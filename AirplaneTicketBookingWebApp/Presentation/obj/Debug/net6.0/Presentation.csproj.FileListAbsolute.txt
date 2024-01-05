@@ -1,5 +1,7 @@
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\appsettings.json
+C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Data\flights.json
+C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Data\tickets.json
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Presentation.staticwebassets.runtime.json
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Presentation.exe
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Presentation.deps.json
@@ -262,5 +264,3 @@ C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebA
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\obj\Debug\net6.0\Presentation.pdb
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\obj\Debug\net6.0\Presentation.genruntimeconfig.cache
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\obj\Debug\net6.0\ref\Presentation.dll
-C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Data\flights.json
-C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Debug\net6.0\Data\tickets.json

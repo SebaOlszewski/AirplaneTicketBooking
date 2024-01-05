@@ -94,6 +94,10 @@ namespace Data.Migrations
                     b.Property<bool>("Cancelled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Owner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PassportImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

@@ -1,5 +1,6 @@
 
 using Data.DataContext;
+using Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -45,6 +46,9 @@ namespace Presentation
             //builder.Services.AddScoped<IFlightRepository, FlightDbRepository>();
             //builder.Services.AddScoped<ITicketRepository, TicketDbRepository>();
 
+            builder.Services.AddScoped<FlightDbRepository>();
+            builder.Services.AddScoped<SeatDbRepository>();
+            builder.Services.AddScoped<TicketDbRepository>();
 
             var app = builder.Build();
 

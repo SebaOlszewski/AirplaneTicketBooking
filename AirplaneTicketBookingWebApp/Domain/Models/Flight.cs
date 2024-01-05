@@ -11,7 +11,7 @@ namespace Domain.Models
     public class Flight
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public Guid Id { get; set; }
 

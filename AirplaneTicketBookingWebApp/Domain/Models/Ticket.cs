@@ -20,9 +20,11 @@ namespace Domain.Models
 
         public virtual Seat Seat { get; set; }  //Navigational
 
-        public string PassportImage { get; set; } = string.Empty;
+        public string Owner { get; set; }
+
+        public string PassportImage { get; set; }
 
         public double PricePaid { get; set; }
-        public bool Cancelled { get; set; } = false;
+        public bool Cancelled { get; set; }
     }
 }
