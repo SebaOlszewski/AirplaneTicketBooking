@@ -23,6 +23,8 @@ namespace Presentation.Models.ViewModels.Ticket
 
         public IQueryable<Seat> Seat { get; set; }  //Navigational
 
+
+
         public string Owner { get; set; }
 
         public string PassportImage { get; set; }

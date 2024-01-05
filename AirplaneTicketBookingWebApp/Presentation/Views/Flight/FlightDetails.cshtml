@@ -9,25 +9,34 @@
 <div>
     <h4>ListFlightsViewModel</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rows)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rows)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Columns)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Columns)
-        </dd>
+    <dl class="row" style="width: 5;">
+        <div class="form-group" style="width: 100vw;">
+            @{int seatIndex = 0;}
+            @for (int col = 0; col < Model.Columns; col++)
+            {
+                @for (int row = 0; row < Model.Rows; row++)
+                {
+                    
+                    var seat = Model.seatingList[seatIndex];
+
+                    @if (seat.isTaken == false)
+                    {
+                       
+                            <img data-seat-taken="@seat.isTaken" src="/images/seat.png" style="width:30px;height:30px;" />
+                       
+                    }
+                    else
+                    {
+                        
+                            <img data-seat-taken="@seat.isTaken" src="/images/seat_is_taken.jpg" style="width:30px;height:30px;" />
+                        
+                    }
+                    seatIndex++;
+
+                }
+                <br />
+            }
+        
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DepartureDate)
         </dt>
@@ -70,3 +79,37 @@
 
     @Html.ActionLink("Edit", "Flight", "ListFlights")
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        var lastClickedButton = null;
+
+        $('.grid-button').click(function (event) {
+            event.preventDefault();
+
+            var seatId = $(this).data('seat-id');
+            $('#seatIdInput').val(seatId);
+
+            // Reset the image of the previously clicked button
+            if (lastClickedButton !== null) {
+                if ($(this).data("seat.isTaken") == true) {
+                    lastClickedButton.find('img').attr('src', '/images/seat_is_taken.jpg');
+
+                } else if ($(this).data("seat.isTaken") == false) {
+                    lastClickedButton.find('img').attr('src', '/images/seat.png');
+                }
+                else {
+                    lastClickedButton.find('img').attr('src', '/images/seat.png');
+                }
+
+            }
+
+            // Change the image source on the current button click
+            $(this).find('img').attr('src', '/images/taken_seat.jpg');
+
+            // Update the last clicked button reference
+            lastClickedButton = $(this);
+        });
+    });
+</script>

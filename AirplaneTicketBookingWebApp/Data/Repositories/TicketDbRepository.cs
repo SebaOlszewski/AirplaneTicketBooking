@@ -11,9 +11,13 @@ namespace Data.Repositories
     public class TicketDbRepository
     {
         public AirlineDbContext _AirlineDbContext;
-        public TicketDbRepository(AirlineDbContext AirlineDbContext)
+        public SeatDbRepository _seatDbRepository;
+        public FlightDbRepository _FlightDbRepository;
+        public TicketDbRepository(AirlineDbContext AirlineDbContext, SeatDbRepository seatDbRepository, FlightDbRepository FlightDbRepository)
         {
             _AirlineDbContext = AirlineDbContext;
+            _seatDbRepository = seatDbRepository;
+            _FlightDbRepository = FlightDbRepository;
         }
 
         public void book(Ticket newTicket)
@@ -33,6 +37,7 @@ namespace Data.Repositories
             return _AirlineDbContext.Tickets;
         }
 
+        
 
         public void cancelTicket(Guid chosenTicketId)
         {
@@ -70,6 +75,20 @@ namespace Data.Repositories
                 throw new Exception("No ticket to update!");
             }
 
+        }
+
+        public void DeleteTicket(Guid ticketID)
+        {
+            var ticketToDelete = getTicket(ticketID);
+            if (ticketToDelete != null)
+            {
+                _AirlineDbContext.Remove(ticketToDelete);
+                _AirlineDbContext.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("No ticket to delete!");
+            }
         }
     }
 }

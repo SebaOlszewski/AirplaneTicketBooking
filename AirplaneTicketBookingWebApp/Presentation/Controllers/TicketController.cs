@@ -12,17 +12,19 @@ namespace Presentation.Controllers
     {
         private SeatDbRepository _seatRepository;
         private TicketDbRepository _ticketRepository;
-        public TicketController(SeatDbRepository seatRepository, TicketDbRepository ticketRepository)
+        private FlightDbRepository _flightRepository;
+        public TicketController(SeatDbRepository seatRepository, TicketDbRepository ticketRepository, FlightDbRepository flightRepository)
         {
             _seatRepository = seatRepository;
             _ticketRepository = ticketRepository;
+            _flightRepository = flightRepository;
         }
 
         public IActionResult ListTickets()
         {
             try
             {
-                IQueryable<Ticket> list = _ticketRepository.getTickets();
+                IQueryable<Ticket> list = _ticketRepository.getTickets().Where(x => x.Owner == User.Identity.Name);
 
                 var output = from p in list
                              select new ListTicketViewModel()
@@ -47,6 +49,7 @@ namespace Presentation.Controllers
         [HttpGet]
         public IActionResult BookTicket(Guid chosenFlightId)
         {
+            var chosenFlight = _flightRepository.GetFlight(chosenFlightId);
             int maxRowLength = _seatRepository.getMaxRowsFromAFlight(chosenFlightId) + 1;
             int maxColLength = _seatRepository.getMaxColumnsFromAFlight(chosenFlightId) + 1;
 
@@ -60,6 +63,7 @@ namespace Presentation.Controllers
                 seatingList = seatingList,
                 maxColLength = maxColLength,
                 maxRowLength = maxRowLength,
+                PricePaid = chosenFlight.WholesalePrice + chosenFlight.CommissionRate,
 
             });;
 
@@ -73,8 +77,24 @@ namespace Presentation.Controllers
         {
             try
             {
-                List<Seat> listOfSeats = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList(); ;
+                List<Seat> listOfSeats = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
+
+                var chosenFlight = _flightRepository.GetFlight(myModel.chosenFlight);
+                if(chosenFlight != null)
+                {
+                    DateTime currentDateTime = DateTime.Now;
+                    if(chosenFlight.DepartureDate < currentDateTime)
+                    {
+                        myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
+                        myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                        myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                        TempData["error"] = "Seat does not exist!";
+                        return View(myModel);
+                    }
+                }
+                
                 //var chosenSeat = _seatRepository.GetSeat(myModel.SeatFk);
+                
 
                 if(listOfSeats.Any(x => x.Id == myModel.SeatFk) != true)
                 {
@@ -158,10 +178,15 @@ namespace Presentation.Controllers
         {
 
             var ticketToCancel = _ticketRepository.getTicket(chosenTicketId);
+            //ticketToCancel.Seat = _seatRepository.GetSeats().Where(x => x.FlightFk == chosenTicketId);
+            //var seatToFree = _seatRepository.GetSeat(ticketToCancel.Seat.Id);
 
             if (ticketToCancel.Id != null)
             {
+                
                 _ticketRepository.cancelTicket(ticketToCancel.Id);
+                _seatRepository.takeSeat(ticketToCancel.SeatFk);
+
                 TempData["message"] = "Ticket canceled successfully";
                 return RedirectToAction("ListTIckets", "Ticket");
             }
@@ -170,6 +195,29 @@ namespace Presentation.Controllers
                 TempData["error"] = "Error while canceling the ticket!";
                 return RedirectToAction("ListTIckets", "Ticket");
             }
+        }
+
+        public IActionResult DeleteTicket(Guid Id, [FromServices] IWebHostEnvironment host)
+        {
+            try
+            {
+                string photoPath = "";
+                var chosenTicket = _ticketRepository.getTicket(Id);
+                var oldImagePath = chosenTicket.PassportImage;
+                var absolutePassportPhotoPathToDelete = host.WebRootPath + @"\passports\" + System.IO.Path.GetFileName(oldImagePath);
+
+                System.IO.File.Delete(absolutePassportPhotoPathToDelete);
+
+                _ticketRepository.cancelTicket(Id);
+                _seatRepository.takeSeat(chosenTicket.SeatFk);
+                TempData["message"] = "Product deleted successfully";
+                _ticketRepository.DeleteTicket(Id);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "Product was not deleted";
+            }
+            return RedirectToAction("ListTickets", "Ticket");
         }
 
 

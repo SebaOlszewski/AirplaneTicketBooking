@@ -13,6 +13,7 @@
           "Microsoft.AspNetCore.Identity.UI": "6.0.25",
           "Microsoft.EntityFrameworkCore": "6.0.25",
           "Microsoft.EntityFrameworkCore.Abstractions": "6.0.25",
+          "Microsoft.EntityFrameworkCore.Design": "6.0.25",
           "Microsoft.EntityFrameworkCore.Proxies": "6.0.25",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.25",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.25",

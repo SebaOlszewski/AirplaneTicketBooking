@@ -8,17 +8,22 @@ namespace Presentation.Controllers
     public class FlightController : Controller
     {
         private FlightDbRepository _flightRepository;
-        public FlightController(FlightDbRepository flightRepository)
+        private SeatDbRepository _seatRepository;
+        public FlightController(FlightDbRepository flightRepository, SeatDbRepository seatRepository)
         {
             _flightRepository = flightRepository;
+            _seatRepository = seatRepository;
         }
 
         public IActionResult ListFlights()
         {
             try
             {
-                IQueryable<Flight> list = _flightRepository.GetFlights().OrderBy(x => x.CountryFrom);
+                DateTime currentDate = DateTime.Now;
 
+                IQueryable<Flight> list = _flightRepository.GetFlights()
+                    .Where(x => x.DepartureDate >= currentDate)
+                    .OrderBy(x => x.CountryFrom);
                 var output = from p in list
                              select new ListFlightsViewModel()
                              {
@@ -30,7 +35,9 @@ namespace Presentation.Controllers
                                  CountryFrom = p.CountryFrom,
                                  CountryTo = p.CountryTo,
                                  WholesalePrice = p.WholesalePrice,
-                                 CommissionRate = p.CommissionRate
+                                 CommissionRate = p.CommissionRate,
+                                 seatingList = _seatRepository.GetAllTheSeatsFromAFlight(p.Id).ToList()
+
                              };
 
                 return View(output);
@@ -80,11 +87,11 @@ namespace Presentation.Controllers
             }
         }
 
-        public IActionResult DeleteFlight(Guid Id)
+        public IActionResult DeleteFlight(Guid Id, FlightDbRepository FlightRepositoryInjection)
         {
             try
             {
-                _flightRepository.DeleteFlight(Id);
+                FlightRepositoryInjection.DeleteFlight(Id);
                 TempData["message"] = "Product deleted successfully";
             }
             catch (Exception ex)
@@ -138,6 +145,8 @@ namespace Presentation.Controllers
                     CommissionRate = myModel.CommissionRate,
                     WholesalePrice = myModel.WholesalePrice,
 
+
+
                 });
             TempData["message"] = "Product saved successfully!";
             return RedirectToAction("ListFlights", "Flight");
@@ -158,7 +167,7 @@ namespace Presentation.Controllers
             }
             else
             {
-
+                List<Seat> _seatingList = _seatRepository.GetAllTheSeatsFromAFlight(Id).ToList();
                 ListFlightsViewModel flightModel = new ListFlightsViewModel()
                 {
                     Id = chosenFlight.Id,
@@ -168,6 +177,7 @@ namespace Presentation.Controllers
                     ArrivalDate = chosenFlight.ArrivalDate,
                     CountryFrom = chosenFlight.CountryFrom,
                     CountryTo = chosenFlight.CountryTo,
+                    seatingList = _seatingList
                 };
                 return View(flightModel);
             }

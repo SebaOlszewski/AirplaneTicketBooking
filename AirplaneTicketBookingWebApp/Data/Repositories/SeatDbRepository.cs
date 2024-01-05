@@ -124,16 +124,22 @@ namespace Data.Repositories
         public void takeSeat(Guid seatId)
         {
             var seatToUpdate = GetSeat(seatId);
-            if (seatToUpdate != null)
+            if (seatToUpdate != null && seatToUpdate.isTaken == false)
             {
                 seatToUpdate.isTaken = true;
                 _AirlineDbContext.SaveChanges();
             }
-            else
+            else if(seatToUpdate != null && seatToUpdate.isTaken == true)
             {
-                throw new Exception("No seat to update");
+                seatToUpdate.isTaken = false;
+                _AirlineDbContext.SaveChanges();
+            }else
+            {
+                throw new Exception("No seed to take/free");
             }
         }
+
+
 
     }
 }

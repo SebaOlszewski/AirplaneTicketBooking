@@ -1,6 +1,8 @@
 
 using Data.DataContext;
+using Data.Migrations;
 using Data.Repositories;
+using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -68,7 +70,6 @@ namespace Presentation
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 

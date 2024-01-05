@@ -22,6 +22,7 @@ namespace Presentation.Models.ViewModels.Ticket
         */
 
         public Guid SeatFk { get; set; }
+        [Display(Name = "Passport:")]
         public IFormFile PassportImage { get; set; }
 
         public string Owner { get; set; } = "";
@@ -29,6 +30,7 @@ namespace Presentation.Models.ViewModels.Ticket
         public Guid chosenFlight { get; set; }
         public List<Seat> seatingList { get; set; }
 
+        [Display(Name = "Ticket price:")]
         public double PricePaid { get; set; }
 
         public int maxRowLength { get; set; }

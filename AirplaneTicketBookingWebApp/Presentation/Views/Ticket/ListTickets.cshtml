@@ -6,9 +6,7 @@
 
 <h1>ListTickets</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -58,7 +56,7 @@
                 @Html.ActionLink("Cancel ticket", "cancelTicket", new { chosenTicketId=item.Id }) |
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "DeleteTicket", new { Id=item.Id })
             </td>
         </tr>
 }
