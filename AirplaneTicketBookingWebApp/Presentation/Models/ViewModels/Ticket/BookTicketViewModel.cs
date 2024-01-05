@@ -9,23 +9,24 @@ namespace Presentation.Models.ViewModels.Ticket
     {
 
         public BookTicketViewModel() { }
-        
-        
+
+        /*
+
         public BookTicketViewModel(Guid chosenFlightId, SeatDbRepository seatRepository)
         {
             Seats = seatRepository.GetAllTheSeatsFromAFlight(chosenFlightId); //populate the list of seats
-            chosenFlight = chosenFlightId;
         }
         public Guid SeatFk { get; set; }       //Foreigh key
 
         public IQueryable<Seat> Seats { get; set; }  //Navigational
-        
-        
+        */
+
+        public Guid SeatFk { get; set; }
         public IFormFile PassportImage { get; set; }
 
         public string Owner { get; set; } = "";
 
-        
+        public Guid chosenFlight { get; set; }
         public List<Seat> seatingList { get; set; }
 
         public double PricePaid { get; set; }
@@ -33,7 +34,7 @@ namespace Presentation.Models.ViewModels.Ticket
         public int maxRowLength { get; set; }
         public int maxColLength { get; set; }
 
-        public Guid chosenFlight {  get; set; }
+        
 
 
     }

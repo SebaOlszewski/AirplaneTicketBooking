@@ -34,15 +34,20 @@ namespace Data.Repositories
         }
 
 
-        public void cancelTicket(Ticket chosenTicket)
+        public void cancelTicket(Guid chosenTicketId)
         {
-            var ticketToCancel = getTicket(chosenTicket.Id);
-            if (ticketToCancel != null)
+            var ticketToCancel = getTicket(chosenTicketId);
+            if (ticketToCancel != null && ticketToCancel.Cancelled == false)
             {
                 ticketToCancel.Cancelled = true;
                 _AirlineDbContext.SaveChanges();
             }
-            else
+            else if (ticketToCancel != null && ticketToCancel.Cancelled == true)
+            {
+                ticketToCancel.Cancelled = false;
+                _AirlineDbContext.SaveChanges();
+                
+            }else
             {
                 throw new Exception("No ticket to cancel!");
             }

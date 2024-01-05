@@ -54,8 +54,9 @@ namespace Presentation.Controllers
 
 
 
-            return View(new BookTicketViewModel(chosenFlightId, _seatRepository)
+            return View(new BookTicketViewModel()
             {
+                chosenFlight = chosenFlightId,
                 seatingList = seatingList,
                 maxColLength = maxColLength,
                 maxRowLength = maxRowLength,
@@ -70,29 +71,47 @@ namespace Presentation.Controllers
         [HttpPost]
         public IActionResult BookTicket(BookTicketViewModel myModel, [FromServices] IWebHostEnvironment host)
         {
-            var chosenSeat = _seatRepository.GetSeat(myModel.SeatFk);
-            if(_seatRepository.isSeatTaken(myModel.SeatFk) == true)
-            {
-                myModel.Seats = _seatRepository.GetSeats();
-                TempData["error"] = "The seat is taken!";
-                return RedirectToAction("ListFlights", "Flight");
-            }else
-            {
-                _seatRepository.takeSeat(myModel.SeatFk);
-            }
-
-            string photoPath = "";
-            ModelState.Remove("Seats");
-            ModelState.Remove("seatingList");
-            if (ModelState.IsValid == false)
-            {
-                //myModel.Seats = _seatRepository.GetSeats();
-                return View(myModel);
-            }
-
-
             try
             {
+                List<Seat> listOfSeats = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList(); ;
+                //var chosenSeat = _seatRepository.GetSeat(myModel.SeatFk);
+
+                if(listOfSeats.Any(x => x.Id == myModel.SeatFk) != true)
+                {
+                    myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
+                    myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                    myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                    TempData["error"] = "Seat does not exist!";
+                    return View(myModel);
+                }
+
+                if (_seatRepository.isSeatTaken(myModel.SeatFk) == true)
+                {
+                    myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
+                    myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight)+1;
+                    myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight)+1;
+                    TempData["error"] = "The seat is taken!";
+                    return View(myModel);
+                }else
+                {
+                    _seatRepository.takeSeat(myModel.SeatFk);
+                }
+
+                string photoPath = "";
+                ModelState.Remove("Seats");
+                ModelState.Remove("seatingList");
+                if (ModelState.IsValid == false)
+                {
+                    //myModel.Seats = _seatRepository.GetSeats();
+                    myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
+                    myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                    myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                    TempData["error"] = "Please upload passport photo!";
+                    return View(myModel);
+                }
+
+
+            
                 //creating id name for a photo
                 string photoName = Guid.NewGuid() + System.IO.Path.GetExtension(myModel.PassportImage.FileName);
 
@@ -126,10 +145,34 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-                myModel.Seats = _seatRepository.GetSeats();
-                TempData["error"] = "Ticket was not saved!";
-                return RedirectToAction("BookTicket", "Ticket");
+                myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
+                myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                TempData["error"] = "Error with ticket booking!";
+                return View(myModel);
             }
         }
+
+
+        public IActionResult CancelTicket(Guid chosenTicketId)
+        {
+
+            var ticketToCancel = _ticketRepository.getTicket(chosenTicketId);
+
+            if (ticketToCancel.Id != null)
+            {
+                _ticketRepository.cancelTicket(ticketToCancel.Id);
+                TempData["message"] = "Ticket canceled successfully";
+                return RedirectToAction("ListTIckets", "Ticket");
+            }
+            else
+            {
+                TempData["error"] = "Error while canceling the ticket!";
+                return RedirectToAction("ListTIckets", "Ticket");
+            }
+        }
+
+
+
     }
 }
