@@ -29,28 +29,26 @@ namespace Presentation
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AirlineDbContext>();
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(connectionString));
-            //builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
-
-
+            builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(connectionString));//builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
 
             //to use the data folder that contains json data files we need to create a path to the file
-
             string pathToSeatJsonFile = builder.Environment.ContentRootPath + "Data\\" + "seats.json";
-            //string pathToTicketJsonFile = builder.Environment.ContentRootPath + "Data\\" + "tickets.json";
+            string pathToTicketJsonFile = builder.Environment.ContentRootPath + "Data\\" + "tickets.json";
 
+
+            //coment out not needed database type (sql DB or json file repositories)
             //json flight repository
+            
 
             //builder.Services.AddScoped<ISeatInterface, SeatJsonRepository>(x => new SeatJsonRepository(pathToSeatJsonFile));
             //builder.Services.AddScoped<ITicketRepository, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
 
+
+
             //sql flight repository
             builder.Services.AddScoped<ISeatInterface, SeatDbRepository>();
-            //builder.Services.AddScoped<IFlightRepository, FlightDbRepository>();
-            //builder.Services.AddScoped<ITicketRepository, TicketDbRepository>();
-
+            builder.Services.AddScoped<ITicketInterface, TicketDbRepository>();
             builder.Services.AddScoped<FlightDbRepository>();
-            builder.Services.AddScoped<TicketDbRepository>();
 
             var app = builder.Build();
 

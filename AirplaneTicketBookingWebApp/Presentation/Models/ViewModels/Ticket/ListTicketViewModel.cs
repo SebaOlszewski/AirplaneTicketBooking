@@ -7,14 +7,16 @@ namespace Presentation.Models.ViewModels.Ticket
 {
     public class ListTicketViewModel
     {
-
+        public FlightDbRepository flightRepository;
         public ListTicketViewModel() { }
 
 
         public ListTicketViewModel(Guid chosenSeatId, ISeatInterface seatRepository)
         {
             Seat = seatRepository.GetSeats().Where(x => x.Id == chosenSeatId); //Get the seat object
-
+            Guid flightFK = seatRepository.GetSeat(chosenSeatId).FlightFk;
+            CountryTo = 
+            CountryFrom = flightRepository.GetFlight(flightFK).CountryFrom;
         }
 
         public Guid Id { get; set; }
@@ -25,6 +27,9 @@ namespace Presentation.Models.ViewModels.Ticket
         public IQueryable<Seat> Seat { get; set; }  //Navigational
 
 
+
+        public string CountryFrom { get; set; }
+        public string CountryTo { get; set; }
 
         public string Owner { get; set; }
 

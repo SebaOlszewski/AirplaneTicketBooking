@@ -12,9 +12,9 @@ namespace Presentation.Controllers
     public class TicketController : Controller
     {
         private ISeatInterface _seatRepository;
-        private TicketDbRepository _ticketRepository;
+        private ITicketInterface _ticketRepository;
         private FlightDbRepository _flightRepository;
-        public TicketController(ISeatInterface seatRepository, TicketDbRepository ticketRepository, FlightDbRepository flightRepository)
+        public TicketController(ISeatInterface seatRepository, ITicketInterface ticketRepository, FlightDbRepository flightRepository)
         {
             _seatRepository = seatRepository;
             _ticketRepository = ticketRepository;
@@ -38,6 +38,10 @@ namespace Presentation.Controllers
                                  PassportImage = p.PassportImage,
                                  PricePaid = p.PricePaid,
                                  Cancelled = p.Cancelled,
+                                 SeatFk = p.SeatFk,
+                                 CountryFrom = _flightRepository.getCountryFrom(_seatRepository.GetSeat(p.SeatFk).FlightFk),
+                                 CountryTo = _flightRepository.getCountryTo(_seatRepository.GetSeat(p.SeatFk).FlightFk),
+
                              };
 
                 return View(output);

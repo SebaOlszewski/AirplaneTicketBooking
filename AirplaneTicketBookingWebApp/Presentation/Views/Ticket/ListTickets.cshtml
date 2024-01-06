@@ -14,12 +14,14 @@
                 >
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.Owner)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.PassportImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryTo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PricePaid)
@@ -27,6 +29,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cancelled)
             </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -37,12 +40,14 @@
                     >
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-             
-            <td>
-                @Html.DisplayFor(modelItem => item.Owner)
-            </td>
             <td>
                     <img src="@Url.Content(item.PassportImage)" alt="Passport Image" style="width: 20%; height: %;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryTo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PricePaid)
@@ -50,11 +55,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Cancelled)
             </td>
-            <td>
-                @Html.ActionLink("Cancel ticket", "cancelTicket", new { chosenTicketId=item.Id }) |
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "DeleteTicket", new { Id=item.Id })
+            
+                <td style ="text-align: middle;">
+                    @if (!item.Cancelled)
+                    {
+                        <form method="post" action="/Ticket/CancelTicket" onsubmit="return confirm('Are you sure you want to cancel this ticket?
+                        There is no return');">
+                            <input type="hidden" name="chosenTicketId" value="@item.Id" />
+                            <button type="submit" style="background-color: red; border: none; color: white; padding: 5px 10px; cursor: pointer;">Cancel</button>
+                        </form>
+                    }else
+                    {
+                        <form method="post" action="/Ticket/DeleteTicket" onsubmit="return confirm('Are you sure you want to remove this ticket from your purchase history??');">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <button type="submit" style="background-color: red; border: none; color: white; padding: 5px 10px; cursor: pointer;">Delete</button>
+                        </form>
+
+                    }
             </td>
         </tr>
 }

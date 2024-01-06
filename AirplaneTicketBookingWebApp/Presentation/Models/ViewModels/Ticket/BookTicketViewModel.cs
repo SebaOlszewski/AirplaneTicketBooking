@@ -10,17 +10,6 @@ namespace Presentation.Models.ViewModels.Ticket
 
         public BookTicketViewModel() { }
 
-        /*
-
-        public BookTicketViewModel(Guid chosenFlightId, SeatDbRepository seatRepository)
-        {
-            Seats = seatRepository.GetAllTheSeatsFromAFlight(chosenFlightId); //populate the list of seats
-        }
-        public Guid SeatFk { get; set; }       //Foreigh key
-
-        public IQueryable<Seat> Seats { get; set; }  //Navigational
-        */
-
         public Guid SeatFk { get; set; }
         [Display(Name = "Passport:")]
         public IFormFile PassportImage { get; set; }

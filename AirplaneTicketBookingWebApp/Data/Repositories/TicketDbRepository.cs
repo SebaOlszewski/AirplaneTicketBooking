@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class TicketDbRepository
+    public class TicketDbRepository : ITicketInterface
     {
         public AirlineDbContext _AirlineDbContext;
         public ISeatInterface _seatDbRepository;
@@ -47,17 +47,7 @@ namespace Data.Repositories
             {
                 ticketToCancel.Cancelled = true;
                 _AirlineDbContext.SaveChanges();
-            }
-            else if (ticketToCancel != null && ticketToCancel.Cancelled == true)
-            {
-                ticketToCancel.Cancelled = false;
-                _AirlineDbContext.SaveChanges();
-                
-            }else
-            {
-                throw new Exception("No ticket to cancel!");
-            }
-            
+            }            
         }
 
         public void updateTicket(Ticket chosenTicket)
