@@ -38,16 +38,18 @@ namespace Presentation
 
             //coment out not needed database type (sql DB or json file repositories)
             //json flight repository
-            
-
-            //builder.Services.AddScoped<ISeatInterface, SeatJsonRepository>(x => new SeatJsonRepository(pathToSeatJsonFile));
-            //builder.Services.AddScoped<ITicketRepository, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
+           
+            //builder.Services.AddScoped<ITicketInterface, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
 
 
 
             //sql flight repository
-            builder.Services.AddScoped<ISeatInterface, SeatDbRepository>();
             builder.Services.AddScoped<ITicketInterface, TicketDbRepository>();
+
+
+
+
+            builder.Services.AddScoped<SeatDbRepository>();
             builder.Services.AddScoped<FlightDbRepository>();
 
             var app = builder.Build();

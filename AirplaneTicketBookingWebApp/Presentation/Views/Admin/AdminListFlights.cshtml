@@ -48,17 +48,21 @@
                 @Html.DisplayFor(modelItem => item.CountryTo)
             </td>
             <td>
-                    @Html.ActionLink("Book", "BookTicket", "Ticket", new { chosenFlightId=item.Id }) |
-
-                    @Html.ActionLink("Details", "FlightDetails", "Flight", new { id = item.Id })
-                    @if (User.Identity.Name == "sebaolszewski39@gmail.com")
+                    @if (item.seatingList.Count(x => x.isTaken) == item.Rows * item.Columns)
                     {
-                        @:|
-                        @Html.ActionLink("Edit flight", "EditFlight","Flight", new { id=item.Id}) @:|
-                        @Html.ActionLink("List seats info", "AdminListSeats","Admin", new { chosenFlight=item.Id}) @:|
-                        @Html.ActionLink("Delete flight", "DeleteFlight","Flight", new { chosenFlight=item.Id}) @:|
 
+                        @:Book |
+                    }else
+                    {
+                        @Html.ActionLink("Book", "BookTicket", "Ticket", new { chosenFlightId=item.Id }) @:|
                     }
+                    
+                    
+                    @Html.ActionLink("Details", "FlightDetails", "Flight", new { id = item.Id }) |
+                    @Html.ActionLink("Edit flight", "EditFlight","Flight", new { id=item.Id}) |
+                    @Html.ActionLink("List seats info", "AdminListSeats","Admin", new { chosenFlight=item.Id}) |
+                    @Html.ActionLink("Delete flight", "DeleteFlight","Flight", new { Id=item.Id})
+
                 
         </tr>
 }

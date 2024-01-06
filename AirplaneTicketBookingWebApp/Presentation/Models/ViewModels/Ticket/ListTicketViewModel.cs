@@ -11,7 +11,7 @@ namespace Presentation.Models.ViewModels.Ticket
         public ListTicketViewModel() { }
 
 
-        public ListTicketViewModel(Guid chosenSeatId, ISeatInterface seatRepository)
+        public ListTicketViewModel(Guid chosenSeatId, SeatDbRepository seatRepository)
         {
             Seat = seatRepository.GetSeats().Where(x => x.Id == chosenSeatId); //Get the seat object
             Guid flightFK = seatRepository.GetSeat(chosenSeatId).FlightFk;

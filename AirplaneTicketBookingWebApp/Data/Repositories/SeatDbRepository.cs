@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class SeatDbRepository : ISeatInterface
+    public class SeatDbRepository
     {
 
         public AirlineDbContext _AirlineDbContext;

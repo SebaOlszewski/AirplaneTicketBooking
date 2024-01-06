@@ -11,9 +11,9 @@ namespace Presentation.Controllers
     public class AdminController : Controller
     {
         private FlightDbRepository _flightRepository;
-        private ISeatInterface _seatRepository;
+        private SeatDbRepository _seatRepository;
         private ITicketInterface _ticketRepository;
-        public AdminController(FlightDbRepository flightRepository, ISeatInterface seatRepository, ITicketInterface ticketRepository)
+        public AdminController(FlightDbRepository flightRepository, SeatDbRepository seatRepository, ITicketInterface ticketRepository)
         {
             _flightRepository = flightRepository;
             _seatRepository = seatRepository;

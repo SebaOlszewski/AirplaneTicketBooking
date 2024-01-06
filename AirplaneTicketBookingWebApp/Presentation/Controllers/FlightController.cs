@@ -9,8 +9,8 @@ namespace Presentation.Controllers
     public class FlightController : Controller
     {
         private FlightDbRepository _flightRepository;
-        private ISeatInterface _seatRepository;
-        public FlightController(FlightDbRepository flightRepository, ISeatInterface seatRepository)
+        private SeatDbRepository _seatRepository;
+        public FlightController(FlightDbRepository flightRepository, SeatDbRepository seatRepository)
         {
             _flightRepository = flightRepository;
             _seatRepository = seatRepository;
@@ -74,6 +74,13 @@ namespace Presentation.Controllers
             {
                 Guid newFlightId = Guid.NewGuid();
 
+                TimeSpan timedifference = myModel.ArrivalDate - myModel.DepartureDate;
+                if (timedifference.TotalDays < -1)
+                {
+                    TempData["error"] = "Arrival date cannot be lower than departure date by more than one day";
+                    
+                    return RedirectToAction("CreateFlight", "Flight");
+                }
 
                 _flightRepository.AddFlight(new Flight{
                         Id = newFlightId,
@@ -88,23 +95,23 @@ namespace Presentation.Controllers
                 });
 
                 TempData["message"] = "Flight saved successfully!";
-                return RedirectToAction("ListFlights", "Flight");
+                return RedirectToAction("AdminListFlights", "Admin");
             }
         }
 
-        public IActionResult DeleteFlight(Guid Id, FlightDbRepository FlightRepositoryInjection)
+        public IActionResult DeleteFlight(Guid Id)
         {
             try
             {
-                FlightRepositoryInjection.DeleteFlight(Id);
+                _flightRepository.DeleteFlight(Id);
                 TempData["message"] = "Product deleted successfully";
             }
             catch (Exception ex)
             {
-                TempData["error"] = "Product was not deleted";
+                TempData["error"] = "Flight was not deleted";
             }
 
-            return RedirectToAction("ListFlights", "Flight");
+            return RedirectToAction("AdminListFlights", "Admin");
         }
 
         [HttpGet]
@@ -148,6 +155,17 @@ namespace Presentation.Controllers
                 return RedirectToAction("ListFlights", "Flight");
             }
             else
+            {
+                Guid newFlightId = Guid.NewGuid();
+
+                TimeSpan timedifference = myModel.ArrivalDate - myModel.DepartureDate;
+                if (timedifference.TotalDays < -1)
+                {
+                    TempData["error"] = "Arrival date cannot be lower than departure date by more than one day";
+
+                    return RedirectToAction("CreateFlight", "Flight");
+                }
+            
                 _flightRepository.UpdateFlight(new Flight()
                 {
                     Id = myModel.Id,
@@ -163,8 +181,9 @@ namespace Presentation.Controllers
 
 
                 });
+            }
             TempData["message"] = "Product saved successfully!";
-            return RedirectToAction("ListFlights", "Flight");
+            return RedirectToAction("AdminListFlights", "Admin");
 
         }
 

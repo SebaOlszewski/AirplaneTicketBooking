@@ -11,10 +11,10 @@ namespace Presentation.Controllers
 {
     public class TicketController : Controller
     {
-        private ISeatInterface _seatRepository;
+        private SeatDbRepository _seatRepository;
         private ITicketInterface _ticketRepository;
         private FlightDbRepository _flightRepository;
-        public TicketController(ISeatInterface seatRepository, ITicketInterface ticketRepository, FlightDbRepository flightRepository)
+        public TicketController(SeatDbRepository seatRepository, ITicketInterface ticketRepository, FlightDbRepository flightRepository)
         {
             _seatRepository = seatRepository;
             _ticketRepository = ticketRepository;
@@ -26,25 +26,39 @@ namespace Presentation.Controllers
             try
             {
                 IQueryable<Ticket> list = _ticketRepository.getTickets().Where(x => x.Owner == User.Identity.Name);
+
+                if(list == null)
+                {
+                    TempData["error"] = "Error while loading the flight data!";
+                    return RedirectToAction("Index", "Home");
+                }
                 if(list.Count() == 0)
                 {
                     TempData["error"] = "You have no tickets - it's time to go somewhere!";
                     return RedirectToAction("ListFLights", "Flight");
                 }
-                var output = from p in list
-                             select new ListTicketViewModel()
-                             {
-                                 Id = p.Id,
-                                 PassportImage = p.PassportImage,
-                                 PricePaid = p.PricePaid,
-                                 Cancelled = p.Cancelled,
-                                 SeatFk = p.SeatFk,
-                                 CountryFrom = _flightRepository.getCountryFrom(_seatRepository.GetSeat(p.SeatFk).FlightFk),
-                                 CountryTo = _flightRepository.getCountryTo(_seatRepository.GetSeat(p.SeatFk).FlightFk),
+                try
+                {
+                    var output = from p in list
+                                 select new ListTicketViewModel()
+                                 {
+                                     Id = p.Id,
+                                     PassportImage = p.PassportImage,
+                                     PricePaid = p.PricePaid,
+                                     Cancelled = p.Cancelled,
+                                     SeatFk = p.SeatFk,
+                                     CountryFrom = _flightRepository.getCountryFrom(_seatRepository.GetSeat(p.SeatFk).FlightFk),
+                                     CountryTo = _flightRepository.getCountryTo(_seatRepository.GetSeat(p.SeatFk).FlightFk),
 
-                             };
+                                 };
 
-                return View(output);
+                    return View(output);
+                }catch (Exception ex)
+                {
+                    TempData["error"] = "Can't read the tickets. Some of them might be in a different database";
+                    return RedirectToAction("Index", "Home");
+                }
+
             }
             catch (Exception ex)
             {

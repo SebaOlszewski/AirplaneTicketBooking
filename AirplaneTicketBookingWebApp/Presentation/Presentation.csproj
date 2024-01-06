@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="Views\Tickets\" />
     <Folder Include="wwwroot\passports\" />
   </ItemGroup>

@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Repositories
+namespace Data.Repositories 
 {
     public class TicketDbRepository : ITicketInterface
     {
         public AirlineDbContext _AirlineDbContext;
-        public ISeatInterface _seatDbRepository;
+        public SeatDbRepository _seatDbRepository;
         public FlightDbRepository _FlightDbRepository;
-        public TicketDbRepository(AirlineDbContext AirlineDbContext, ISeatInterface seatDbRepository, FlightDbRepository FlightDbRepository)
+        public TicketDbRepository(AirlineDbContext AirlineDbContext, SeatDbRepository seatDbRepository, FlightDbRepository FlightDbRepository)
         {
             _AirlineDbContext = AirlineDbContext;
             _seatDbRepository = seatDbRepository;

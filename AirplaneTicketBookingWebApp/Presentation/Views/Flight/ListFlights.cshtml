@@ -76,8 +76,19 @@
             </td>
 
             <td>
-                    @Html.ActionLink("Book", "BookTicket", "Ticket", new { chosenFlightId=item.Id }) |
+                    @if(item.seatingList.Count(x => x.isTaken) == item.Rows * item.Columns)
+                    {
+                        
+                    @:Book |
                     @Html.ActionLink("Details", "FlightDetails", "Flight", new { id = item.Id })
+
+                    }else
+                    {
+                    @Html.ActionLink("Book", "BookTicket", "Ticket", new { chosenFlightId=item.Id }) @:|
+                    @Html.ActionLink("Details", "FlightDetails", "Flight", new { id = item.Id })
+                    }
+                    
+                    
 
                 
             </td>

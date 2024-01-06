@@ -12,8 +12,8 @@ namespace Data.Repositories
     public class FlightDbRepository
     {
         public AirlineDbContext _AirlineDbContext;
-        public ISeatInterface _seatRepository;
-        public FlightDbRepository(AirlineDbContext AirlineDbContext, ISeatInterface seatRepository)
+        public SeatDbRepository _seatRepository;
+        public FlightDbRepository(AirlineDbContext AirlineDbContext, SeatDbRepository seatRepository)
         {
             _AirlineDbContext = AirlineDbContext;
             _seatRepository = seatRepository;
