@@ -24,7 +24,7 @@ namespace Presentation.Models.ViewModels.Ticket
         public Guid SeatFk { get; set; }
         [Display(Name = "Passport:")]
         public IFormFile PassportImage { get; set; }
-
+        [Display(Name = "Email: ")]
         public string Owner { get; set; } = "";
 
         public Guid chosenFlight { get; set; }

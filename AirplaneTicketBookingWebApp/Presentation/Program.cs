@@ -41,16 +41,15 @@ namespace Presentation
 
             //json flight repository
 
-            builder.Services.AddScoped<ISeatInterface, SeatJsonRepository>(x => new SeatJsonRepository(pathToSeatJsonFile));
+            //builder.Services.AddScoped<ISeatInterface, SeatJsonRepository>(x => new SeatJsonRepository(pathToSeatJsonFile));
             //builder.Services.AddScoped<ITicketRepository, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
 
             //sql flight repository
-            //builder.Services.AddScoped<ISeatRepository, SeatDbRepository>();
+            builder.Services.AddScoped<ISeatInterface, SeatDbRepository>();
             //builder.Services.AddScoped<IFlightRepository, FlightDbRepository>();
             //builder.Services.AddScoped<ITicketRepository, TicketDbRepository>();
 
             builder.Services.AddScoped<FlightDbRepository>();
-            //builder.Services.AddScoped<SeatDbRepository>();
             builder.Services.AddScoped<TicketDbRepository>();
 
             var app = builder.Build();
