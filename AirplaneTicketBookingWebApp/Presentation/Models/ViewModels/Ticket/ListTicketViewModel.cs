@@ -1,4 +1,5 @@
 ﻿using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,7 @@ namespace Presentation.Models.ViewModels.Ticket
         public ListTicketViewModel() { }
 
 
-        public ListTicketViewModel(Guid chosenSeatId,SeatDbRepository seatRepository)
+        public ListTicketViewModel(Guid chosenSeatId, ISeatInterface seatRepository)
         {
             Seat = seatRepository.GetSeats().Where(x => x.Id == chosenSeatId); //Get the seat object
 

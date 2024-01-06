@@ -1,4 +1,5 @@
 ﻿using Data.DataContext;
+using Domain.Interfaces;
 using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace Data.Repositories
     public class TicketDbRepository
     {
         public AirlineDbContext _AirlineDbContext;
-        public SeatDbRepository _seatDbRepository;
+        public ISeatInterface _seatDbRepository;
         public FlightDbRepository _FlightDbRepository;
-        public TicketDbRepository(AirlineDbContext AirlineDbContext, SeatDbRepository seatDbRepository, FlightDbRepository FlightDbRepository)
+        public TicketDbRepository(AirlineDbContext AirlineDbContext, ISeatInterface seatDbRepository, FlightDbRepository FlightDbRepository)
         {
             _AirlineDbContext = AirlineDbContext;
             _seatDbRepository = seatDbRepository;

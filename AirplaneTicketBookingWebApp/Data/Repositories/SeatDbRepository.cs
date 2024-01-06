@@ -1,4 +1,5 @@
 ﻿using Data.DataContext;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class SeatDbRepository
+    public class SeatDbRepository : ISeatInterface
     {
 
         public AirlineDbContext _AirlineDbContext;
@@ -75,10 +76,9 @@ namespace Data.Repositories
 
         public void deleteChosenSeatInAFlight(Guid flightId, int col, int row)
         {
-            //need to change it to a list. Get all of the seats with the same data
+            
             var seatToDelete = GetSeats().SingleOrDefault(x => x.FlightFk == flightId && x.Column == col && x.Row == row);
-            //IQueryable<Flight> list = _flightRepository.GetFlights().Where(x => x.DepartureDate >= currentDate)
-              //      .OrderBy(x => x.CountryFrom);
+            
 
             if (seatToDelete != null)
             {
@@ -97,7 +97,7 @@ namespace Data.Repositories
 
         public void updateSeat(Seat chosenSeat)
         {
-            var seatToUpdate = GetSeat(chosenSeat.Id);
+            var seatToUpdate = GetSeat(chosenSeat.Id); //make a copy of a seat
             if (seatToUpdate != null)
             {
                 seatToUpdate.Row = chosenSeat.Row;

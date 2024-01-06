@@ -2,6 +2,7 @@
 using Data.DataContext;
 using Data.Migrations;
 using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,12 +36,12 @@ namespace Presentation
 
             //to use the data folder that contains json data files we need to create a path to the file
 
-            //string pathToFlightJsonFile = builder.Environment.ContentRootPath + "Data\\" + "flights.json";
+            string pathToSeatJsonFile = builder.Environment.ContentRootPath + "Data\\" + "seats.json";
             //string pathToTicketJsonFile = builder.Environment.ContentRootPath + "Data\\" + "tickets.json";
 
             //json flight repository
 
-            //builder.Services.AddScoped<IFlightRepository, FlightsJsonRepository>(x => new FlightsJsonRepository(pathToFlightJsonFile));
+            builder.Services.AddScoped<ISeatInterface, SeatJsonRepository>(x => new SeatJsonRepository(pathToSeatJsonFile));
             //builder.Services.AddScoped<ITicketRepository, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
 
             //sql flight repository
@@ -49,7 +50,7 @@ namespace Presentation
             //builder.Services.AddScoped<ITicketRepository, TicketDbRepository>();
 
             builder.Services.AddScoped<FlightDbRepository>();
-            builder.Services.AddScoped<SeatDbRepository>();
+            //builder.Services.AddScoped<SeatDbRepository>();
             builder.Services.AddScoped<TicketDbRepository>();
 
             var app = builder.Build();

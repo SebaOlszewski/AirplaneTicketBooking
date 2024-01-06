@@ -1,5 +1,6 @@
 ﻿using Data.DataContext;
 using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -10,10 +11,10 @@ namespace Presentation.Controllers
 {
     public class TicketController : Controller
     {
-        private SeatDbRepository _seatRepository;
+        private ISeatInterface _seatRepository;
         private TicketDbRepository _ticketRepository;
         private FlightDbRepository _flightRepository;
-        public TicketController(SeatDbRepository seatRepository, TicketDbRepository ticketRepository, FlightDbRepository flightRepository)
+        public TicketController(ISeatInterface seatRepository, TicketDbRepository ticketRepository, FlightDbRepository flightRepository)
         {
             _seatRepository = seatRepository;
             _ticketRepository = ticketRepository;

@@ -1,4 +1,5 @@
 ﻿using Data.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace Presentation.Controllers
     public class AdminController : Controller
     {
         private FlightDbRepository _flightRepository;
-        private SeatDbRepository _seatRepository;
+        private ISeatInterface _seatRepository;
         private TicketDbRepository _ticketRepository;
-        public AdminController(FlightDbRepository flightRepository, SeatDbRepository seatRepository, TicketDbRepository ticketRepository)
+        public AdminController(FlightDbRepository flightRepository, ISeatInterface seatRepository, TicketDbRepository ticketRepository)
         {
             _flightRepository = flightRepository;
             _seatRepository = seatRepository;
