@@ -24,6 +24,11 @@ namespace Presentation.Controllers
                 IQueryable<Flight> list = _flightRepository.GetFlights()
                     .Where(x => x.DepartureDate >= currentDate)
                     .OrderBy(x => x.CountryFrom);
+                if(list.Count() == 0)
+                {
+                    TempData["error"] = "There are no flights at the moment";
+                    return RedirectToAction("Index", "Home");
+                }
                 var output = from p in list
                              select new ListFlightsViewModel()
                              {
@@ -66,7 +71,6 @@ namespace Presentation.Controllers
             }
             else
             {
-                //{1a816378-8582-45d8-aed6-216ceb44e321}
                 Guid newFlightId = Guid.NewGuid();
 
 
@@ -159,7 +163,7 @@ namespace Presentation.Controllers
 
                 });
             TempData["message"] = "Product saved successfully!";
-            return RedirectToAction("AdminListFlights", "Admin");
+            return RedirectToAction("ListFlights", "Flight");
 
         }
 

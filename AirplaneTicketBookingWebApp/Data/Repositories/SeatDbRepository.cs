@@ -75,8 +75,11 @@ namespace Data.Repositories
 
         public void deleteChosenSeatInAFlight(Guid flightId, int col, int row)
         {
-            var seatToDelete = GetSeats().Any(x => x.FlightFk == flightId && x.Column == col && x.Row == row);
-            
+            //need to change it to a list. Get all of the seats with the same data
+            var seatToDelete = GetSeats().SingleOrDefault(x => x.FlightFk == flightId && x.Column == col && x.Row == row);
+            //IQueryable<Flight> list = _flightRepository.GetFlights().Where(x => x.DepartureDate >= currentDate)
+              //      .OrderBy(x => x.CountryFrom);
+
             if (seatToDelete != null)
             {
                 

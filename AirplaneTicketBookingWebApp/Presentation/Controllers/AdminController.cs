@@ -27,11 +27,7 @@ namespace Presentation.Controllers
            {
                    try
                     {
-                        DateTime currentDate = DateTime.Now;
-
-                        IQueryable<Flight> list = _flightRepository.GetFlights()
-                            .Where(x => x.DepartureDate >= currentDate)
-                            .OrderBy(x => x.CountryFrom);
+                        IQueryable<Flight> list = _flightRepository.GetFlights().OrderBy(x => x.CountryFrom);
                         var output = from p in list
                                      select new AdminListFlightsViewModel()
                                      {
@@ -69,11 +65,13 @@ namespace Presentation.Controllers
 
                 List<Seat> list = _seatRepository.GetSeats().Where(x => x.FlightFk == chosenFlight).ToList();
 
+
+
                 AdminListSeatsViewModel displaySeatsModel = new AdminListSeatsViewModel()
                 {
                     chosenFlight = chosenFlight,
-                    maxRowLength = _flightRepository.GetFlight(chosenFlight).Rows + 1,
-                    maxColLength = _flightRepository.GetFlight(chosenFlight).Rows + 1,
+                    maxRowLength = _flightRepository.GetFlight(chosenFlight).Rows,
+                    maxColLength = _flightRepository.GetFlight(chosenFlight).Rows,
                     seatingList = list
                 };
 
@@ -100,21 +98,19 @@ namespace Presentation.Controllers
         {
             if (User.Identity.Name == "sebaolszewski39@gmail.com")
             {
+                var chosenSeat = _seatRepository.GetSeat(seatId);
                 List<Ticket> ticketList = _ticketRepository.getTickets().Where(x => x.SeatFk == seatId).ToList();
 
-                if (ticketList.Count == 0)
+                if (ticketList.Count == 0 && chosenSeat != null)
                 {
-                    TempData["message"] = "This seat never had ticket assigned to it";
-                    return RedirectToAction("AdminListFlights", "Admin");
+                    TempData["error"] = "This seat had never beed taken, no tickets to display";
+                    return RedirectToAction("AdminListSeats", "Admin", new { chosenFlight = chosenSeat.FlightFk });
                 }
-                else
-                {
-                }
-                if (ticketList == null)
+                if (ticketList == null )
                 {
 
                     TempData["error"] = "File was not found!";
-                    return RedirectToAction("AdminListFlights", "Admin");
+                    return RedirectToAction("AdminListSeats", "Admin", new { chosenFlight = chosenSeat.FlightFk });
                 }
                 else
                 {

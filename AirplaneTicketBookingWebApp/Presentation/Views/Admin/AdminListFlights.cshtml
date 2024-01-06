@@ -4,8 +4,10 @@
     ViewData["Title"] = "AdminListFlights";
 }
 
-<h1>AdminListFlights</h1>
-
+<h1>List Flights - admin</h1>
+<h5>
+    @Html.ActionLink("Create a new flight", "CreateFlight", "Flight")
+</h5>
 <table class="table">
     <thead>
         <tr>
@@ -46,6 +48,17 @@
                 @Html.DisplayFor(modelItem => item.CountryTo)
             </td>
             <td>
+                    @Html.ActionLink("Book", "BookTicket", "Ticket", new { chosenFlightId=item.Id }) |
+
+                    @Html.ActionLink("Details", "FlightDetails", "Flight", new { id = item.Id })
+                    @if (User.Identity.Name == "sebaolszewski39@gmail.com")
+                    {
+                        @:|
+                        @Html.ActionLink("Edit flight", "EditFlight","Flight", new { id=item.Id}) @:|
+                        @Html.ActionLink("List seats info", "AdminListSeats","Admin", new { chosenFlight=item.Id}) @:|
+                        @Html.ActionLink("Delete flight", "DeleteFlight","Flight", new { chosenFlight=item.Id}) @:|
+
+                    }
                 
         </tr>
 }

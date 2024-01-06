@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<Presentation.Models.ViewModels.Flight.ListFlightsViewModel>
 
+
 @{
     ViewData["Title"] = "ListFlights";
 }
 
-<h1>ListFlights</h1>
+
+
+    <h1>List FLights - user view</h1>
 
 
 <table class="table">
@@ -74,19 +77,9 @@
 
             <td>
                     @Html.ActionLink("Book", "BookTicket", "Ticket", new { chosenFlightId=item.Id }) |
+                    @Html.ActionLink("Details", "FlightDetails", "Flight", new { id = item.Id })
 
-                    @Html.ActionLink("Details", "FlightDetails", "Flight", new { id = item.Id }) |
-                    @if (User.Identity.Name == "sebaolszewski39@gmail.com")
-                    {
-                        @Html.ActionLink("Edit flight", "EditFlight","Flight", new { id=item.Id}) @:|
-                        @Html.ActionLink("List seats info", "AdminListSeats","Admin", new { chosenFlight=item.Id}) @:|
-                        @Html.ActionLink("Delete flight", "DeleteFlight","Flight", new { chosenFlight=item.Id}) @:|
-
-                    }
-
-
-                    @*<a href="/Flight/DeleteFlight?Id=@item.Id" onclick='return confirm("Are you sure you want to delete this flight?")'>Delete</a>
-                *@
+                
             </td>
         </tr>
 }

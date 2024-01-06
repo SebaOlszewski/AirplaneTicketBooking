@@ -25,7 +25,11 @@ namespace Presentation.Controllers
             try
             {
                 IQueryable<Ticket> list = _ticketRepository.getTickets().Where(x => x.Owner == User.Identity.Name);
-
+                if(list.Count() == 0)
+                {
+                    TempData["error"] = "You have no tickets - it's time to go somewhere!";
+                    return RedirectToAction("ListFLights", "Flight");
+                }
                 var output = from p in list
                              select new ListTicketViewModel()
                              {
@@ -83,7 +87,7 @@ namespace Presentation.Controllers
                         myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
                         myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
                         myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
-                        TempData["error"] = "Seat does not exist!";
+                        TempData["error"] = "Flight had already departured! You cannot book a seat for this plane anymore";
                         return View(myModel);
                     }
                 }
