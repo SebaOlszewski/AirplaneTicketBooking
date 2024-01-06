@@ -20,6 +20,18 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Admin/AdminListFlights.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5MaXN0RmxpZ2h0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Admin/AdminListSeats.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5MaXN0U2VhdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Admin/AdminTicketDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5UaWNrZXREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Sebastian/Documents/git/AirplaneTicketBooking/AirplaneTicketBookingWebApp/Presentation/Views/Flight/CreateFlight.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0XENyZWF0ZUZsaWdodC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

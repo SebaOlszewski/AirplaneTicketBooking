@@ -20,24 +20,32 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="ListFlights">List Flights</a>
-                        </li>
+                        
 
                         @if (User.Identity.Name == "sebaolszewski39@gmail.com")
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="ListFLights"> ---Admin controller---</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="CreateFlight">Create Flight</a>
                             </li>
+                            
                         }
+
+                        
+
+                        <li class="nav-item" style="float: right;">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="ListFlights">List Flights</a>
+                        </li>
 
                         @if (User.Identity.IsAuthenticated == true)
                         {
-                            
-                       
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="ListTickets">List Tickets</a>
-                        </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="ListTickets">My Tickets</a>
+                            </li>
                         }
                         
                     </ul>

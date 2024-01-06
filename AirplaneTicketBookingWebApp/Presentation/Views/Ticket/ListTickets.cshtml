@@ -10,12 +10,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th >
+            <th hidden
+                >
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th >
-                @Html.DisplayNameFor(model => model.SeatFk)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Owner)
             </th>
@@ -34,17 +33,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-                <td >
+            <td hidden
+                    >
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-                <td >
-                @Html.DisplayFor(modelItem => item.SeatFk)
-            </td>
+             
             <td>
                 @Html.DisplayFor(modelItem => item.Owner)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PassportImage)
+                    <img src="@Url.Content(item.PassportImage)" alt="Passport Image" style="width: 20%; height: %;" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PricePaid)

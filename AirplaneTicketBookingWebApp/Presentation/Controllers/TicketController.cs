@@ -30,7 +30,6 @@ namespace Presentation.Controllers
                              select new ListTicketViewModel()
                              {
                                  Id = p.Id,
-                                 SeatFk = p.Id,
                                  PassportImage = p.PassportImage,
                                  PricePaid = p.PricePaid,
                                  Cancelled = p.Cancelled,
@@ -68,10 +67,6 @@ namespace Presentation.Controllers
             });;
 
         }
-
-
-
-        //{057f3b69-a789-4463-5245-08dc0d58919c}
         [HttpPost]
         public IActionResult BookTicket(BookTicketViewModel myModel, [FromServices] IWebHostEnvironment host)
         {
@@ -156,7 +151,7 @@ namespace Presentation.Controllers
                     PassportImage = photoPath,
                     PricePaid = myModel.PricePaid,
                     Owner = myModel.Owner,
-                    Cancelled = true
+                    Cancelled = false
                 }) ;
 
                 

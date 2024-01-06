@@ -1,0 +1,66 @@
+﻿@model Presentation.Models.ViewModels.Admin.AdminListSeatsViewModel
+
+@{
+    ViewData["Title"] = "AdminListSeats";
+}
+
+<h1>AdminListSeats</h1>
+
+<div>
+    <h4>ListFlightsViewModel</h4>
+    <hr />
+    <dl class="row" style="width: 5;">
+        <div class="form-group" style="width: 100vw;">
+
+            @{
+                int seatIndex = 0;
+            }
+            @for (int col = 0; col < Model.maxColLength; col++)
+            {
+                @for (int row = 0; row < Model.maxRowLength; row++)
+                {
+
+                    var seat = Model.seatingList[seatIndex];
+
+                    @if (seat.isTaken == false)
+                    {
+                        <button class="grid-button" data-seat-taken="@seat.isTaken" data-seat-id="@seat.Id" data-row="@row" data-col="@col">
+                            <img src="/images/seat.png" style="width:30px;height:30px;" />
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="grid-button" data-seat-taken="@seat.isTaken" data-seat-id="@seat.Id" data-row="@row" data-col="@col">
+                            <img src="/images/seat_is_taken.jpg" style="width:30px;height:30px;" />
+                        </button>
+                    }
+                    seatIndex++;
+                }
+                <br />
+            }
+            </div>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="AdminListFLights">Back to List</a>
+</div>
+
+<script>
+    // Get all buttons with the class "grid-button"
+    var buttons = document.querySelectorAll(".grid-button");
+
+    // Add a click event listener to each button
+    buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            // Get data attributes from the clicked button
+            var seatId = button.getAttribute('data-seat-id');
+
+            // Construct the URL for the detail view with the data
+            var detailViewUrl = "/Admin/AdminTicketDetails?seatId=" + seatId;
+
+            // Navigate to the detail view
+            window.location.href = detailViewUrl;
+        });
+    });
+</script>

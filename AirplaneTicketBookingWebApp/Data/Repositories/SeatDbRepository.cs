@@ -75,7 +75,7 @@ namespace Data.Repositories
 
         public void deleteChosenSeatInAFlight(Guid flightId, int col, int row)
         {
-            var seatToDelete = GetSeats().SingleOrDefault(x => x.FlightFk == flightId && x.Column == col && x.Row == row);
+            var seatToDelete = GetSeats().Any(x => x.FlightFk == flightId && x.Column == col && x.Row == row);
             
             if (seatToDelete != null)
             {

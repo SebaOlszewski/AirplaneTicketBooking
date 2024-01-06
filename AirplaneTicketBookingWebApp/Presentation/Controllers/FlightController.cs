@@ -102,25 +102,35 @@ namespace Presentation.Controllers
             return RedirectToAction("ListFlights", "Flight");
         }
 
-
         [HttpGet]
         public IActionResult EditFlight(Guid Id)
         {
-            EditFlightViewModel flightModel = new EditFlightViewModel();
 
 
-            //this is just to show current details of the flight to the user
-            var originalFlight = _flightRepository.GetFlight(Id);
-            flightModel.Rows = originalFlight.Rows;
-            flightModel.Columns = originalFlight.Columns;
-            flightModel.DepartureDate = originalFlight.DepartureDate;
-            flightModel.ArrivalDate = originalFlight.ArrivalDate;
-            flightModel.CountryFrom = originalFlight.CountryFrom;
-            flightModel.CountryTo = originalFlight.CountryTo;
-            flightModel.WholesalePrice = originalFlight.WholesalePrice;
-            flightModel.CommissionRate = originalFlight.CommissionRate;
 
-            return View(flightModel);
+            if (User.Identity.Name == "sebaolszewski39@gmail.com")
+            {
+                EditFlightViewModel flightModel = new EditFlightViewModel();
+
+
+                //this is just to show current details of the flight to the user
+                var originalFlight = _flightRepository.GetFlight(Id);
+                flightModel.Rows = originalFlight.Rows;
+                flightModel.Columns = originalFlight.Columns;
+                flightModel.DepartureDate = originalFlight.DepartureDate;
+                flightModel.ArrivalDate = originalFlight.ArrivalDate;
+                flightModel.CountryFrom = originalFlight.CountryFrom;
+                flightModel.CountryTo = originalFlight.CountryTo;
+                flightModel.WholesalePrice = originalFlight.WholesalePrice;
+                flightModel.CommissionRate = originalFlight.CommissionRate;
+
+                return View(flightModel);
+            }
+            else
+            {
+                TempData["error"] = "Permission not granted!!!";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
 
@@ -149,7 +159,7 @@ namespace Presentation.Controllers
 
                 });
             TempData["message"] = "Product saved successfully!";
-            return RedirectToAction("ListFlights", "Flight");
+            return RedirectToAction("AdminListFlights", "Admin");
 
         }
 
@@ -161,8 +171,7 @@ namespace Presentation.Controllers
             var chosenFlight = _flightRepository.GetFlight(Id);
             if (chosenFlight == null)
             {
-                //add information that flight was not found
-                TempData["error"] = "File was not found!";
+                TempData["error"] = "Flight was not found!";
                 return RedirectToAction("ListFlights", "Flights");
             }
             else
