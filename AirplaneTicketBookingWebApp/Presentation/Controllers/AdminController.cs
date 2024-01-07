@@ -33,6 +33,8 @@ namespace Presentation.Controllers
                                      select new AdminListFlightsViewModel()
                                      {
                                          Id = p.Id,
+                                         Columns = p.Columns,
+                                         Rows = p.Rows,
                                          DepartureDate = p.DepartureDate,
                                          ArrivalDate = p.ArrivalDate,
                                          CountryFrom = p.CountryFrom,
