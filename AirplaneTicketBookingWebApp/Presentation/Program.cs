@@ -32,19 +32,18 @@ namespace Presentation
             builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(connectionString));//builder.Services.AddDbContext<AirlineDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
 
             //to use the data folder that contains json data files we need to create a path to the file
-            string pathToSeatJsonFile = builder.Environment.ContentRootPath + "Data\\" + "seats.json";
             string pathToTicketJsonFile = builder.Environment.ContentRootPath + "Data\\" + "tickets.json";
 
 
             //coment out not needed database type (sql DB or json file repositories)
             //json flight repository
            
-            //builder.Services.AddScoped<ITicketInterface, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
+            builder.Services.AddScoped<ITicketInterface, TicketJsonRepository>(x => new TicketJsonRepository(pathToTicketJsonFile));
 
 
 
             //sql flight repository
-            builder.Services.AddScoped<ITicketInterface, TicketDbRepository>();
+            //builder.Services.AddScoped<ITicketInterface, TicketDbRepository>();
 
 
 
