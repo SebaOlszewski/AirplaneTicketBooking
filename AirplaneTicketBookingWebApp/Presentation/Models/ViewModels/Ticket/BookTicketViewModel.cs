@@ -1,5 +1,6 @@
 ﻿using Data.Repositories;
 using Domain.Models;
+using Presentation.Validators;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,8 +9,9 @@ namespace Presentation.Models.ViewModels.Ticket
     public class BookTicketViewModel
     {
 
-        public BookTicketViewModel() { }
+                
 
+        
         public Guid SeatFk { get; set; }
         [Display(Name = "Passport:")]
         public IFormFile PassportImage { get; set; }

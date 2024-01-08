@@ -3,6 +3,7 @@ using Data.Repositories;
 using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Presentation.Models.ViewModels.Flight;
 using Presentation.Models.ViewModels.Ticket;
@@ -72,22 +73,43 @@ namespace Presentation.Controllers
         public IActionResult BookTicket(Guid chosenFlightId)
         {
             var chosenFlight = _flightRepository.GetFlight(chosenFlightId);
-            int maxRowLength = _seatRepository.getMaxRowsFromAFlight(chosenFlightId) + 1;
-            int maxColLength = _seatRepository.getMaxColumnsFromAFlight(chosenFlightId) + 1;
-
-            List<Seat> seatingList = _seatRepository.GetAllTheSeatsFromAFlight(chosenFlightId).ToList();
-
-
-
-            return View(new BookTicketViewModel()
+            if (chosenFlight == null)
             {
-                chosenFlight = chosenFlightId,
-                seatingList = seatingList,
-                maxColLength = maxColLength,
-                maxRowLength = maxRowLength,
-                PricePaid = chosenFlight.WholesalePrice + chosenFlight.CommissionRate,
+                TempData["Error"] = "Flight does not exist!";
+                return RedirectToAction("ListFlights", "Flight");
 
-            });;
+            }
+
+            List<Flight> flights = _flightRepository.GetFlights().ToList();
+            if(flights.Any(x => x.Id == chosenFlightId))
+            {
+
+                int maxRowLength = _seatRepository.getMaxRowsFromAFlight(chosenFlightId) + 1;
+                int maxColLength = _seatRepository.getMaxColumnsFromAFlight(chosenFlightId) + 1;
+
+                List<Seat> seatingList = _seatRepository.GetAllTheSeatsFromAFlight(chosenFlightId).ToList();
+                int numOfSeatsTaken = seatingList.Count(x => x.isTaken == true);
+                //a7f1ac0d-3bcd-4e45-b1b5-17ad02bd4db0
+                if (maxRowLength * maxColLength == numOfSeatsTaken)
+                {
+                    TempData["Error"] = "Flight is already full!";
+                    return RedirectToAction("ListFlights", "Flight");
+                }
+
+
+                return View(new BookTicketViewModel()
+                {
+                    chosenFlight = chosenFlightId,
+                    seatingList = seatingList,
+                    maxColLength = maxColLength,
+                    maxRowLength = maxRowLength,
+                    PricePaid = chosenFlight.WholesalePrice + chosenFlight.CommissionRate,
+
+                }); ;
+            }
+
+            return RedirectToAction("ListFlights", "Flight");
+
 
         }
         [HttpPost]

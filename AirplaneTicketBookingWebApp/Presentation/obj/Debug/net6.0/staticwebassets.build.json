@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Qqfw6nMkRVOVMDBsUtiN1TOdv8Ke8zVbbl/rxYL1AOw=",
+  "Hash": "REV886XO5A6/O6liEdBSVRM53DKf5CDpw+NTPXxEqEs=",
   "Source": "Presentation",
   "BasePath": "_content/Presentation",
   "Mode": "Default",
@@ -2140,23 +2140,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
-    },
-    {
-      "Identity": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\d662948c-b1cc-4815-958d-a56ca2611506.png",
-      "SourceId": "Presentation",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\",
-      "BasePath": "_content/Presentation",
-      "RelativePath": "passports/d662948c-b1cc-4815-958d-a56ca2611506.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\passports\\d662948c-b1cc-4815-958d-a56ca2611506.png"
     }
   ]
 }
