@@ -104,20 +104,27 @@ namespace Presentation.Controllers
                     if(chosenFlight.DepartureDate < currentDateTime)
                     {
                         myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
-                        myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                        myModel.maxRowLength = _seatRepository.getMaxRowsFromAFlight(myModel.chosenFlight) + 1;
                         myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
                         TempData["error"] = "Flight had already departured! You cannot book a seat for this plane anymore";
                         return View(myModel);
                     }
                 }
                 
-                //var chosenSeat = _seatRepository.GetSeat(myModel.SeatFk);
+                if(myModel.SeatFk == Guid.Empty)
+                {
+                    myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
+                    myModel.maxRowLength = _seatRepository.getMaxRowsFromAFlight(myModel.chosenFlight) + 1;
+                    myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                    TempData["error"] = "Choose a seat";
+                    return View(myModel);
+                }
                 
 
                 if(listOfSeats.Any(x => x.Id == myModel.SeatFk) != true)
                 {
                     myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
-                    myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                    myModel.maxRowLength = _seatRepository.getMaxRowsFromAFlight(myModel.chosenFlight) + 1;
                     myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
                     TempData["error"] = "Seat does not exist!";
                     return View(myModel);
@@ -126,13 +133,10 @@ namespace Presentation.Controllers
                 if (_seatRepository.isSeatTaken(myModel.SeatFk) == true)
                 {
                     myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
-                    myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight)+1;
+                    myModel.maxRowLength = _seatRepository.getMaxRowsFromAFlight(myModel.chosenFlight)+1;
                     myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight)+1;
                     TempData["error"] = "The seat is taken!";
                     return View(myModel);
-                }else
-                {
-                    _seatRepository.takeSeat(myModel.SeatFk);
                 }
 
                 string photoPath = "";
@@ -142,14 +146,14 @@ namespace Presentation.Controllers
                 {
                     //myModel.Seats = _seatRepository.GetSeats();
                     myModel.seatingList = _seatRepository.GetAllTheSeatsFromAFlight(myModel.chosenFlight).ToList();
-                    myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
+                    myModel.maxRowLength = _seatRepository.getMaxRowsFromAFlight(myModel.chosenFlight) + 1;
                     myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
                     TempData["error"] = "Please upload passport photo!";
                     return View(myModel);
                 }
 
 
-            
+                _seatRepository.takeSeat(myModel.SeatFk);
                 //creating id name for a photo
                 string photoName = Guid.NewGuid() + System.IO.Path.GetExtension(myModel.PassportImage.FileName);
 
@@ -187,7 +191,7 @@ namespace Presentation.Controllers
                 myModel.maxRowLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
                 myModel.maxColLength = _seatRepository.getMaxColumnsFromAFlight(myModel.chosenFlight) + 1;
                 TempData["error"] = "Error with ticket booking!";
-                return View(myModel);
+                return RedirectToAction("ListFlights", "Flight");
             }
         }
 

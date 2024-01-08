@@ -598,3 +598,4 @@ C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebA
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Release\net6.0\win-x86\msquic.dll
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Release\net6.0\win-x86\ucrtbase.dll
 C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Release\net6.0\win-x86\aspnetcorev2_inprocess.dll
+C:\Users\Sebastian\Documents\git\AirplaneTicketBooking\AirplaneTicketBookingWebApp\Presentation\bin\Release\net6.0\win-x86\Data\tickets.json

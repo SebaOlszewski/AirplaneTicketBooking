@@ -1,4 +1,5 @@
-﻿using Data.Repositories;
+﻿using Data.DataContext;
+using Data.Repositories;
 using Domain.Interfaces;
 using Domain.Models;
 using Humanizer;
@@ -27,7 +28,7 @@ namespace Presentation.Controllers
             if (User.Identity.Name == "sebaolszewski39@gmail.com")
            {
                    try
-                    {
+                {
                         IQueryable<Flight> list = _flightRepository.GetFlights().OrderBy(x => x.CountryFrom);
                         var output = from p in list
                                      select new AdminListFlightsViewModel()
@@ -74,7 +75,7 @@ namespace Presentation.Controllers
                 {
                     chosenFlight = chosenFlight,
                     maxRowLength = _flightRepository.GetFlight(chosenFlight).Rows,
-                    maxColLength = _flightRepository.GetFlight(chosenFlight).Rows,
+                    maxColLength = _flightRepository.GetFlight(chosenFlight).Columns,
                     seatingList = list
                 };
 

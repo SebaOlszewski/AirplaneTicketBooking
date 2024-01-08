@@ -257,32 +257,8 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\0c3da55b-a909-463c-abb1-a92db77e616c.png",
-      "PackagePath": "staticwebassets\\passports\\0c3da55b-a909-463c-abb1-a92db77e616c.png"
-    },
-    {
-      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\3d09e432-d87f-43ff-be74-e9612d18784e.png",
-      "PackagePath": "staticwebassets\\passports\\3d09e432-d87f-43ff-be74-e9612d18784e.png"
-    },
-    {
-      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\43dae950-0b54-4a80-a3c3-7e94ef807acf.png",
-      "PackagePath": "staticwebassets\\passports\\43dae950-0b54-4a80-a3c3-7e94ef807acf.png"
-    },
-    {
-      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\98c4e656-b9c0-4e37-b6b2-630b5cf5c261.png",
-      "PackagePath": "staticwebassets\\passports\\98c4e656-b9c0-4e37-b6b2-630b5cf5c261.png"
-    },
-    {
-      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\b34104da-d2a6-4f6c-aae0-ab655f937a7d.png",
-      "PackagePath": "staticwebassets\\passports\\b34104da-d2a6-4f6c-aae0-ab655f937a7d.png"
-    },
-    {
-      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\d53b1ddb-da58-4fbe-b0da-b930b9f79369.png",
-      "PackagePath": "staticwebassets\\passports\\d53b1ddb-da58-4fbe-b0da-b930b9f79369.png"
-    },
-    {
-      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\f8663f70-4f46-46c5-8575-0a7c180496e7.png",
-      "PackagePath": "staticwebassets\\passports\\f8663f70-4f46-46c5-8575-0a7c180496e7.png"
+      "Id": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\wwwroot\\passports\\d662948c-b1cc-4815-958d-a56ca2611506.png",
+      "PackagePath": "staticwebassets\\passports\\d662948c-b1cc-4815-958d-a56ca2611506.png"
     },
     {
       "Id": "obj\\Release\\net6.0\\win-x86\\staticwebassets\\msbuild.Presentation.Microsoft.AspNetCore.StaticWebAssets.props",

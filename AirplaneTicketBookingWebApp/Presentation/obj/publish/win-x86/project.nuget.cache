@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7WMEs1ZuwN8h4pfudmyUKF7XrxjmOttLH2mt14lDpiZHpRv5zTpefiGOrDspw5/AM8Jc44hJIwZ0e30oAOKBhA==",
+  "dgSpecHash": "it6ZJFaEoBbDEqr9VBS1abMzR8OjkwmyHu5/bSLBwuwyLNqewBN1SBA06GFBHn+gdC7aCMn+V9STM60FQcDl5Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Sebastian\\Documents\\git\\AirplaneTicketBooking\\AirplaneTicketBookingWebApp\\Presentation\\Presentation.csproj",
   "expectedPackageFiles": [
@@ -267,8 +267,7 @@
     "C:\\Users\\Sebastian\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Sebastian\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.23\\microsoft.netcore.app.runtime.win-x86.6.0.23.nupkg.sha512",
     "C:\\Users\\Sebastian\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.23\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.23.nupkg.sha512",
-    "C:\\Users\\Sebastian\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.23\\microsoft.aspnetcore.app.runtime.win-x86.6.0.23.nupkg.sha512",
-    "C:\\Users\\Sebastian\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.23\\microsoft.netcore.app.crossgen2.win-x64.6.0.23.nupkg.sha512"
+    "C:\\Users\\Sebastian\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.23\\microsoft.aspnetcore.app.runtime.win-x86.6.0.23.nupkg.sha512"
   ],
   "logs": []
 }
